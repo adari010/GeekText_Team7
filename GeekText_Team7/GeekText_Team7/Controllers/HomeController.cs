@@ -27,6 +27,20 @@ namespace GeekText_Team7.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            ViewData["Message"] = "Your Login Page";
+
+            return View();
+        }
+
+        public IActionResult Biography()
+        {
+            ViewData["Message"] = "Your Biography page.";
+
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();

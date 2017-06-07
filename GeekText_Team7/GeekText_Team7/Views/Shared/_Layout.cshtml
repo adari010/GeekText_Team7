@@ -22,31 +22,40 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <img height="10%" width="10%" src="~/images/GeekText.svg" style="margin: 10px 10px 10px 10px" />
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar">test</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">GeekText_Team7</a>
+        <ul class="nav navbar-nav">
+            <li><img height="75" width="75" src="~/images/GeekText.svg" style="margin: 10px 10px 10px 10px" /></li>
+        </ul>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar">test</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="margin: 25px 0px 25px 0px">GeekText_Team7</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index" style="margin: 25px 0px 25px 0px">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+</nav>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - GeekText_Team7</p>
+            <p>2017 - GeekText
+                <a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a>
+                <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a>
+                <a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a>
+                <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px">Biography</a>
+            </p>
+
         </footer>
     </div>
 
