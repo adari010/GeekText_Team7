@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\images\GeekText.svg" />
     <Content Include="wwwroot\output.ico" />
   </ItemGroup>
   <ItemGroup>
