@@ -2,11 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link runat="server" rel="shortcut icon" href="~/output.ico" type="image/x-icon" />
-    <link runat="server" rel="icon" href="~/output.ico" type="image/ico" />
+    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GeekText_Team7</title>
+    <title>@ViewData["Title"]Geek Text</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -23,7 +23,7 @@
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <ul class="nav navbar-nav">
-            <li><img height="75" width="75" src="~/images/GeekText.svg" style="margin: 10px 10px 10px 10px" /></li>
+            <li><img height="75" width="75" src="~/images/GeekText.svg" style="margin: 10px 25px 10px 25px" /></li>
         </ul>
             <div class="container">
                 <div class="navbar-header">
@@ -33,14 +33,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="margin: 25px 0px 25px 0px">GeekText_Team7</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand" style="margin: 25px 0px 25px 0px">Geek Text</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Home" asp-action="Index" style="margin: 25px 0px 25px 0px">Home</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a></li>
-                        <li><a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index" style="margin: 25px 0px 25px 0px; ">Home</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px; ">About</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px; ">Contact</a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px; ">Login</a></li>
                     </ul>
                 </div>
             </div>
@@ -49,11 +49,12 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>2017 - GeekText
-                <a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a>
-                <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a>
-                <a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a>
-                <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px">Biography</a>
+            <h3>2017 - GeekText</h3>
+            <p>
+                <a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a><br />
+                <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a><br />
+                <a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a><br />
+                <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px">Biography</a><br />
             </p>
 
         </footer>

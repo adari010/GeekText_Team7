@@ -16,6 +16,7 @@
     <Content Include="wwwroot\css\site - Copy.css">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\images\GeekText.svg" />
     <Content Include="wwwroot\output.ico" />
   </ItemGroup>
