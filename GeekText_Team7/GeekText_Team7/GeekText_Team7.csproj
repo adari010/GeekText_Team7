@@ -11,14 +11,8 @@
   <ItemGroup>
     <Content Include="wwwroot\css\Lumen.css" />
     <Content Include="wwwroot\css\Lumen.min.css" />
-    <Content Include="wwwroot\css\Lumne.css" />
-    <Content Include="wwwroot\css\Lumne.min.css" />
-    <Content Include="wwwroot\css\site - Copy.css">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="wwwroot\favicon.ico" />
     <Content Include="wwwroot\images\GeekText.svg" />
-    <Content Include="wwwroot\output.ico" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
