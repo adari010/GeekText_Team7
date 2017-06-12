@@ -19,6 +19,8 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -34,6 +36,29 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="App" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="App" asp-action="Contact">Contact</a></li>
+                </ul>
+
+                <select class='navbar-form navbar-left nav-search-dropdown searchSelect' id='searchDropdownBox' style='display:inline-block'>
+                    <option selected='selected' value='search-alias=aps'>All</option>
+                    <option value='genre'>Genre</option>
+                    <option value='topSellers'>Top Sellers</option>
+                    <option value='rating'>Book Rating</option>
+                </select>
+                 
+                <form class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" type="submit">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
         </div>
