@@ -7,44 +7,70 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using GeekText_Team7.Models;
+using Newtonsoft.Json.Serialization;
+using AutoMapper;
+using GeekText_Team7.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GeekText_Team7
 {
     public class Startup
     {
+        private IHostingEnvironment _env;
+        private IConfigurationRoot _config;
+
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder()
+            _env = env;
+
+        var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            _config = builder.Build();
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfigurationRoot config { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton(_config);
+            services.AddDbContext<BookStoreContext>();
+            services.AddScoped<IBookStoreRepository, BookStoreRepository>();
+            services.AddTransient<BookStoreContextSeedData>();
+            services.AddLogging();
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                .AddJsonOptions(config =>
+                {
+                    config.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BookStoreContextSeedData seeder, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<UserViewModel, User>().ReverseMap();
+            });
+
+            //loggerFactory.AddConsole(config.GetSection("Logging"));
+            
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug();
                 app.UseBrowserLink();
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/App/Error");
+                loggerFactory.AddDebug();
             }
 
             app.UseStaticFiles();
@@ -53,8 +79,10 @@ namespace GeekText_Team7
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=App}/{action=Index}/{id?}");
             });
+
+            seeder.EnsureSeedData().Wait();
         }
     }
 }
