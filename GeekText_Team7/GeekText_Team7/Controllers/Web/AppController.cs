@@ -46,6 +46,11 @@ namespace GeekText_Team7.Controllers.Web
             return View();
         }
 
+        public IActionResult SignUp()
+        {
+            return View();
+        }
+
         public IActionResult Error()
         {
             return View();
