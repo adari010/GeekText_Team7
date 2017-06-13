@@ -19,8 +19,7 @@ html {
 }
 
 body {
-    padding-top: 95px;
-    margin: 0;
+    margin: 95px 20px 20px 20px;
 }
 
 article,
@@ -1410,7 +1409,6 @@ html {
 }
 
 body {
-
     font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
