@@ -22,38 +22,12 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 
-@*<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Geek Text</title>
-
-    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
-    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
-
-    <environment names="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
-        <link rel="stylesheet" href="~/css/Cart.css" />
-    </environment>
-    <environment names="Staging,Production">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/Cart.min.css" asp-append-version="true" />
-    </environment>
-    @Html.Raw(JavaScriptSnippet.FullScript)
-</head>
-    *@
 <body>
-
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        
         <div class="container">
             <div class="navbar-header">
-                <ul>
-                    <li><img height="75" width="75" src="~/images/GeekText.svg" /></li>
+                <ul class="nav navbar-nav">
+                    <li><img height="75" width="75" src="~/images/GeekText.svg" style="margin: 10px 25px 10px 25px" /></li>
                 </ul>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
