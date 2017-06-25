@@ -32,6 +32,11 @@ namespace GeekText_Team7.Controllers.Web
             return View();
         }
 
+        public IActionResult Books()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             return View();

@@ -29,5 +29,12 @@ namespace GeekText_Team7.Models
 
             return _context.Users.ToList();
         }
+
+        public IEnumerable<Book> GetBooks()
+        {
+            _logger.LogInformation("Getting Books from the Database");
+
+            return _context.Books.ToList();
+        }
     }
 }

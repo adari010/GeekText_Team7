@@ -56,10 +56,11 @@ namespace GeekText_Team7
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserViewModel, User>().ReverseMap();
+                config.CreateMap<BookViewModel, Book>().ReverseMap();
             });
 
             //loggerFactory.AddConsole(config.GetSection("Logging"));
-            
+
 
             if (env.IsDevelopment())
             {
