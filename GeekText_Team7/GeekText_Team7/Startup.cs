@@ -53,6 +53,10 @@ namespace GeekText_Team7
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, BookStoreContextSeedData seeder, ILoggerFactory loggerFactory)
         {
+            //This snipped is code is to avoid problems dealing with Cross Resources Sharing (CORS), according to a resource I found.
+            //If it gives problems later, delete it.
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+
             Mapper.Initialize(config =>
             {
                 config.CreateMap<UserViewModel, User>().ReverseMap();
