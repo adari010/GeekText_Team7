@@ -7,8 +7,6 @@ using GeekText_Team7.Models;
 using Microsoft.Extensions.Logging;
 using GeekText_Team7.ViewModels;
 using AutoMapper;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
