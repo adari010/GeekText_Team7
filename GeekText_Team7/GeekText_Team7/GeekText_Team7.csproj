@@ -11,9 +11,14 @@
   <ItemGroup>
     <Content Include="wwwroot\css\Cart.css" />
     <Content Include="wwwroot\css\Cart.min.css" />
+    <Content Include="wwwroot\js\app-books.js" />
     <Content Include="wwwroot\js\app-users.js" />
     <Content Include="wwwroot\js\simpleControls.js" />
+    <Content Include="wwwroot\js\booksController.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\js\usersController.js" />
+    <Content Include="wwwroot\views\booksView.html" />
     <Content Include="wwwroot\views\usersView.html" />
     <Content Include="wwwroot\views\waitCursor.html" />
   </ItemGroup>

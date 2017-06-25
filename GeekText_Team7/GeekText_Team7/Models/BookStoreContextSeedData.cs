@@ -52,7 +52,7 @@ namespace GeekText_Team7.Models
                 await _context.SaveChangesAsync();
             }
 
-            if (!_context.Books.Any())
+            /*if (!_context.Books.Any())
             {
                 var testBook = new Book()
                 {
@@ -71,7 +71,7 @@ namespace GeekText_Team7.Models
                 _context.Books.Add(testBook1);
 
                 await _context.SaveChangesAsync();
-            }
+            }*/
 
         }
 
