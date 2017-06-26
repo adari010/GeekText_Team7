@@ -8,14 +8,15 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Description</th>
                 <th>Genre</th>
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="id in vm.books">
+            <tr ng-repeat="books in vm.books">
+                <td><img src="~/images/Books/{{books.isbn}}.jpg"/></td>
                 <td>{{ books.id }}</td>
                 <td>{{ books.isbn }}</td>
                 <td>{{ books.title }}</td>
