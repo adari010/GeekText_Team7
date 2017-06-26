@@ -7,5 +7,9 @@ namespace GeekText_Team7.Models
         User GetUsersByName(string userFirstName);
         IEnumerable<User> GetAllUsers();
         IEnumerable<Book> GetBooks();
+
+        IEnumerable<BookAuthor> GetBookAuthors();
+
+        IEnumerable<Author> GetAuthors();
     }
 }

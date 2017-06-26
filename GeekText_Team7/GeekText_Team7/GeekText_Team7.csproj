@@ -11,13 +11,29 @@
   <ItemGroup>
     <Content Include="wwwroot\css\Cart.css" />
     <Content Include="wwwroot\css\Cart.min.css" />
+    <Content Include="wwwroot\js\app-authors - Copy.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\js\app-authors.js" />
+    <Content Include="wwwroot\js\app-bookauthors.js" />
+    <Content Include="wwwroot\js\app-books - Copy.js" />
     <Content Include="wwwroot\js\app-books.js" />
     <Content Include="wwwroot\js\app-users.js" />
+    <Content Include="wwwroot\js\authorsController.js" />
+    <Content Include="wwwroot\js\bookauthorsController.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\js\simpleControls.js" />
     <Content Include="wwwroot\js\booksController.js">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot\js\usersController.js" />
+    <Content Include="wwwroot\views\bookauthorsView.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\views\authorsView.html">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Include="wwwroot\views\booksView.html" />
     <Content Include="wwwroot\views\usersView.html" />
     <Content Include="wwwroot\views\waitCursor.html" />
@@ -40,6 +56,11 @@
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="wwwroot\js\authorsController.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

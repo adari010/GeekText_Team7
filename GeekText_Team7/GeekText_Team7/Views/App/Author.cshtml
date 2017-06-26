@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Browse Books";
+    ViewData["Title"] = "Browse Authors";
 }
 @section Scripts {
     <script src="~/lib/angular/angular.min.js"></script>
@@ -7,19 +7,19 @@
 
     <environment names="Development">
         <script src="~/js/simpleControls.js"></script>
-        <script src="~/js/app-books.js"></script>
-        <script src="~/js/booksController.js"></script>
+        <script src="~/js/app-authors.js"></script>
+        <script src="~/js/authorsController.js"></script>
     </environment>
 
     <environment names="Production,Staging">
         <script src="~/lib/simpleControls.js"></script>
-        <script src="~/js/app-books.js"></script>
-        <script src="~/js/booksController.js"></script>
+        <script src="~/js/app-authors.js"></script>
+        <script src="~/js/authorsController.js"></script>
     </environment>
 
 }
 
-<div class="row" ng-app="app-books">
+<div class="row" ng-app="app-authors">
 
     <div ng-view></div>
 

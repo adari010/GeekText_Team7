@@ -57,6 +57,8 @@ namespace GeekText_Team7
             {
                 config.CreateMap<UserViewModel, User>().ReverseMap();
                 config.CreateMap<BookViewModel, Book>().ReverseMap();
+                config.CreateMap<AuthorViewModel, Author>().ReverseMap();
+                config.CreateMap<BookAuthorViewModel, BookAuthor>().ReverseMap();
             });
 
             //loggerFactory.AddConsole(config.GetSection("Logging"));
