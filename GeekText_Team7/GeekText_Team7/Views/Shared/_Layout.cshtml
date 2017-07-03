@@ -7,7 +7,7 @@
     <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"]Geek Text</title>
+    <title>@ViewData["Title"]</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -75,17 +75,44 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer style="background-color: #f5f5f5">
             <h3>2017 - GeekText</h3>
-            <p>
-                <a asp-area="" asp-controller="App" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a><br />
-                <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px">Login</a><br />
-                <a asp-area="" asp-controller="App" asp-action="About" style="margin: 25px 0px 25px 0px">About</a><br />
-                <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px">Biography</a><br />
-                
-           </p>
-
-
+            <table>
+                <tr>
+                    <td><a asp-area="" asp-controller="App" asp-action="Contact" style="margin: 25px 0px 25px 0px"><strong>Contact</strong></a></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><strong>Contact Information:</strong></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><strong>Contact Address:</strong></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px"><strong>Login</strong></a>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Phone: <i>305.555.5555</i></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><i>11200 SW 8th St</i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="App" asp-action="About" style="margin: 25px 0px 25px 0px"><strong>About</strong></a>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Support: <i><a href="mailto:mquir016@fiu.edu">Support@GeekText.com</a></i></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td><i>Miami, FL 33199</i></td>
+                </tr>
+                <tr>
+                    <td>
+                        <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px"><strong>Biography</strong></a>
+                    </td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td>Marketing: <i><a href="mailto:mquir016@fiu.edu">Marketing@GeekText.com</a></i></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td></td>
+                </tr>
+            </table>
         </footer>
     </div>
 

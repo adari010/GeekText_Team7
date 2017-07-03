@@ -36,5 +36,19 @@ namespace GeekText_Team7.Models
 
             return _context.Books.ToList();
         }
+
+        public IEnumerable<BookAuthor> GetBookAuthors()
+        {
+            _logger.LogInformation("Getting Books from the Database");
+
+            return _context.BookAuthors.ToList();
+        }
+
+        public IEnumerable<Author> GetAuthors()
+        {
+            _logger.LogInformation("Getting Books from the Database");
+
+            return _context.Authors.ToList();
+        }
     }
 }
