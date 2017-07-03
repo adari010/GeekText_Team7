@@ -8,9 +8,9 @@ namespace GeekText_Team7.ViewModels
 {
     public class UserViewModel
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
     }
 }
