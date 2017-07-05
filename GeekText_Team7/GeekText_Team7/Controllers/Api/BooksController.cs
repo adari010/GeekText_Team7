@@ -41,18 +41,21 @@ namespace GeekText_Team7.Controllers.Api
             }
         }
 
-        // GET api/values/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        // GET api/books
+        /*[HttpGet]
+        public IEnumerable<Book> Get()
+        {
+            _logger.LogInformation("Getting Books from the Database");
 
-        //// POST api/values
-        //[HttpPost]
-        //public void Post([FromBody]string value)
-        //{
-        //}
+            return _repository.GetBooks();
+        }*/
+
+        // POST api/values
+        /*[HttpPost]
+        public void Post([FromBody]string value)
+        {
+
+        }*/
 
         //// PUT api/values/5
         //[HttpPut("{id}")]

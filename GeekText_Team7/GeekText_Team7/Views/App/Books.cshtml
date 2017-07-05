@@ -1,5 +1,7 @@
-﻿@{
-    ViewData["Title"] = "Browse Books";
+﻿@model IEnumerable<GeekText_Team7.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
 }
 @section Scripts {
     <script src="~/lib/angular/angular.min.js"></script>
@@ -21,10 +23,43 @@
         <script src="~/js/app-books.js"></script>
         <script src="~/js/booksController.js"></script>
     </environment>
-
 }
 
 <a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>
+
+@*<p>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ISBN)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Genre)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Genre)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>*@
 
 <div class="row" ng-app="app-books">
 
