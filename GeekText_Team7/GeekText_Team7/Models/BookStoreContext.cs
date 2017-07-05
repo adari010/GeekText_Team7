@@ -12,7 +12,7 @@ namespace GeekText_Team7.Models
     {
         private IConfigurationRoot _config;
 
-        public BookStoreContext(IConfigurationRoot config, DbContextOptions options) : base(options)
+        public BookStoreContext(IConfigurationRoot config, DbContextOptions<BookStoreContext> options) : base(options)
         {
             _config = config;
         }

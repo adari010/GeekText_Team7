@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GeekText_Team7.Models
 {
-    public class Book
+    public partial class Book
     {
+        public Book()
+        {
+            BookAuthor = new HashSet<BookAuthor>();
+        }
+
         public int Id { get; set; }
-        public string ISBN { get; set; }
+        public string Isbn { get; set; }
         public string Title { get; set; }
+        public int UserId { get; set; }
         public string Description { get; set; }
         public string Genre { get; set; }
 
-
-
+        public virtual ICollection<BookAuthor> BookAuthor { get; set; }
+        public virtual User User { get; set; }
     }
 }
