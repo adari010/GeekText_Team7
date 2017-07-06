@@ -2,6 +2,12 @@
     ViewData["Title"] = "Cart";
 }
 
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <div class="container">
     <table id="cart" class="table table-hover table-condensed">
@@ -41,7 +47,7 @@
                 @*Add Total Price*@<td class="text-center"><strong>Total</strong></td>
             </tr>
             <tr>
-                <td><a asp-area="" asp-controller="App" asp-action="Index" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                <td><a onclick="goBack()" class="btn btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                 <td colspan="2" class="hidden-xs"></td>
                 @*Add Total Price*@<td class="hidden-xs text-center"><strong>Total</strong></td>
                 <td><a href="#" class="btn btn-success btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>

@@ -4,6 +4,11 @@
 @section Scripts {
     <script src="~/lib/angular/angular.min.js"></script>
     <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 
     <environment names="Development">
         <script src="~/js/simpleControls.js"></script>
@@ -19,8 +24,12 @@
 
 }
 
+<a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>
+
 <div class="row" ng-app="app-bookauthors">
 
     <div ng-view></div>
 
 </div>
+
+<a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>
