@@ -3,34 +3,72 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using GeekText_Team7.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GeekText_Team7.Controllers
 {
     public class HomeController : Controller
     {
+
+        private IConfigurationRoot _config;
+        private IBookStoreRepository _repository;
+        private ILogger<HomeController> _logger;
+
+        public HomeController(IConfigurationRoot config, IBookStoreRepository repository, ILogger<HomeController> logger)
+        {
+            _config = config;
+            _repository = repository;
+            _logger = logger;
+        }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Users()
+        {
+            return View();
+        }
+
+        public IActionResult Books()
+        {
+            return View();
+        }
+
+        public IActionResult Author()
+        {
+            return View();
+        }
+
+        public IActionResult BookAuthor()
         {
             return View();
         }
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-
             return View();
         }
 
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
-
+            return View();
+        }
+        public IActionResult Cart()
+        {
             return View();
         }
 
-        public IActionResult Login()
+        public IActionResult SignUp()
         {
-            ViewData["Message"] = "Your Login Page";
+            return View();
+        }
 
+        public IActionResult Error()
+        {
             return View();
         }
 
@@ -41,9 +79,5 @@ namespace GeekText_Team7.Controllers
             return View();
         }
 
-        public IActionResult Error()
-        {
-            return View();
-        }
     }
 }
