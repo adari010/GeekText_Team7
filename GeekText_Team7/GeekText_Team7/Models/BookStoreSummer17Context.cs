@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-
 namespace GeekText_Team7.Models
 {
     public partial class BookStoreSummer17Context : DbContext
