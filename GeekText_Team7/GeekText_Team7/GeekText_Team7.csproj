@@ -28,15 +28,6 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Include="wwwroot\js\usersController.js" />
-    <Content Include="wwwroot\views\bookauthorsView.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\views\authorsView.html">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Include="wwwroot\views\booksView.html" />
-    <Content Include="wwwroot\views\usersView.html" />
-    <Content Include="wwwroot\views\waitCursor.html" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="6.0.2" />
