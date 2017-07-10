@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Browse Authors";
+}
+@section Scripts {
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <environment names="Development">
+        <script src="~/js/simpleControls.js"></script>
+        <script src="~/js/app-authors.js"></script>
+        <script src="~/js/authorsController.js"></script>
+    </environment>
+
+    <environment names="Production,Staging">
+        <script src="~/lib/simpleControls.js"></script>
+        <script src="~/js/app-authors.js"></script>
+        <script src="~/js/authorsController.js"></script>
+    </environment>
+
+}
+    <a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>
+
+<div class="row" ng-app="app-authors">
+
+    <div ng-view></div>
+
+</div>
+
+    <a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>

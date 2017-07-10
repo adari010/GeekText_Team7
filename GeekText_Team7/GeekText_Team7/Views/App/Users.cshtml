@@ -1,0 +1,71 @@
+﻿@model IEnumerable<GeekText_Team7.Models.User>
+
+@{
+    ViewData["Title"] = "Users";
+}
+@section Scripts {
+    <script src="~/lib/angular/angular.min.js"></script>
+    <script src="~/lib/angular-route/angular-route.min.js"></script>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+
+    <environment names="Development">
+        <script src="~/js/simpleControls.js"></script>
+        <script src="~/js/app-users.js"></script>
+        <script src="~/js/usersController.js"></script>
+    </environment>
+
+    <environment names="Production,Staging">
+        <script src="~/lib/simpleControls.js"></script>
+        <script src="~/lib/app-users.js"></script>
+        <script src="~/lib/usersController.js"></script>
+    </environment>
+
+}
+
+<a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>
+
+<p>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sex)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sex)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>
+
+@*<div class="row" ng-app="app-users">
+
+    <div ng-view></div>
+
+</div>*@
+
+<a onclick="goBack()" class="btn btn-warning" style="margin: 10px 0px 10px 0px"><i class="fa fa-angle-left"></i>Go Back</a>

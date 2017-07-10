@@ -1,6 +1,7 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 <!DOCTYPE html>
 <html>
+
 <head>
     <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
     <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
@@ -11,23 +12,22 @@
     <environment names="Development">
         <link rel="stylesheet" href="~/css/Lumen.css" />
         @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />*@
-        <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="~/css/Lumen.min.css" asp-append-version="true" />
         @*<link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+    asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />*@
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
-<body style="padding-top:100px">
+
+<body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><img height="75" width="75" src="~/images/GeekText.svg" /></a></li>
+                    <li><a asp-area="" asp-controller="App" asp-action="Index"><img height="75" width="75" src="~/images/GeekText.svg"/></a></li>
                 </ul>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -39,8 +39,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a></li>
+                    <li><a asp-area="" asp-controller="App" asp-action="About" style="margin: 25px 0px 25px 0px">About</a></li>
+                    <li><a asp-area="" asp-controller="App" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a></li>
                 </ul>
 
                 <select class='navbar-form navbar-left nav-search-dropdown searchSelect' id='searchDropdownBox' style="display:inline-block; margin: 40px 0px 40px 0px">
@@ -49,8 +49,8 @@
                     <option value='topSellers'>Top Sellers</option>
                     <option value='rating'>Book Rating</option>
                 </select>
-
-                <form class="navbar-form navbar-left" style="margin: 30px 0px 30px 0px">
+                 
+                <form class="navbar-form navbar-left"  style="margin: 30px 0px 30px 0px">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
@@ -62,9 +62,10 @@
                 </form>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" style="margin: 25px 0px 25px 0px" asp-action="Cart"><span class="glyphicon-shopping-cart:before"></span> Cart</a></li>
+                    <li><a asp-area="" asp-controller="App" style="margin: 25px 0px 25px 0px" asp-action="Cart" ><span class="glyphicon-shopping-cart:before"></span> Cart</a></li>
+                    <li><a asp-area="" asp-controller="App" asp-action="SignUp" ><span class="glyphicon glyphicon-user" style="margin: 25px 0px 25px 0px"></span> Sign Up</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="Login"><span class="glyphicon glyphicon-log-in" style="margin: 25px 0px 25px 0px"></span> Login</a></li>
                 </ul>
-                @await Html.PartialAsync("_LoginPartial")
             </div>
         </div>
     </nav>
@@ -75,14 +76,16 @@
             <h3>2017 - GeekText</h3>
             <table>
                 <tr>
-                    <td><a asp-area="" asp-controller="Home" asp-action="Index" style="margin: 25px 0px 25px 0px"><strong>Home</strong></a></td>
+                    <td><a asp-area="" asp-controller="App" asp-action="Contact" style="margin: 25px 0px 25px 0px"><strong>Contact</strong></a></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td><strong>Contact Information:</strong></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td><strong>Contact Address:</strong></td>
                 </tr>
                 <tr>
-                    <td><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px"><strong>Contact</strong></a></td>
+                    <td>
+                        <a asp-area="" asp-controller="Home" asp-action="Login" style="margin: 25px 0px 25px 0px"><strong>Login</strong></a>
+                    </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>Phone: <i>305.555.5555</i></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -90,7 +93,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <a asp-area="" asp-controller="Home" asp-action="About" style="margin: 25px 0px 25px 0px"><strong>About</strong></a>
+                        <a asp-area="" asp-controller="App" asp-action="About" style="margin: 25px 0px 25px 0px"><strong>About</strong></a>
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>Support: <i><a href="mailto:mquir016@fiu.edu">Support@GeekText.com</a></i></td>
@@ -134,4 +137,3 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
-
