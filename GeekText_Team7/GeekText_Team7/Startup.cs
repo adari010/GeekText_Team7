@@ -53,7 +53,6 @@ namespace GeekText_Team7
             services.AddDbContext<BookStoreSummer17Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BookStoreContextConnection")));
                 
-            services.AddScoped<IBookStoreRepository, BookStoreRepository>();
             services.AddLogging();
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GeekText_Team7.Models;
+using GeekText_Team7.Models.BookAuthorViewModels;
 
 namespace GeekText_Team7.Controllers.Api
 {
@@ -21,12 +22,18 @@ namespace GeekText_Team7.Controllers.Api
         // GET: BookAuthors
         public async Task<IActionResult> Index()
         {
-            var bookStoreSummer17Context = _context.BookAuthor.Include(b => b.Author).Include(b => b.Book);
-            return View(await bookStoreSummer17Context.ToListAsync());
+            var viewModel = new BookIndexData();
+            viewModel.BookAuthor = await _context.BookAuthor
+                .Include(c => c.Book)
+                .Include(b => b.Author)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(viewModel);
         }
 
         // GET: BookAuthors/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -72,7 +79,7 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: BookAuthors/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -127,7 +134,7 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: BookAuthors/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

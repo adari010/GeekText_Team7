@@ -1,47 +1,16 @@
-@model IEnumerable<GeekText_Team7.Models.BookAuthor>
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Books";
 }
 
-<h2>Index</h2>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Order)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Book)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Book.Id)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+@foreach (var item in Model.Book)
+{
+    <div class="item active">
+        <img src="~/images/Books/@(Html.DisplayFor(modelItem => item.Isbn)).jpg" alt="@Html.DisplayFor(modelItem => item.Title)" class="img-responsive" />
+            <p>
+                
+                @Html.ActionLink(item.Title, "Details", new { @item.Id })
+            </p>
+    </div>
 }
-    </tbody>
-</table>
