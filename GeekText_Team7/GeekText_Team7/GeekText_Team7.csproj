@@ -53,5 +53,8 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\Api\" />
+  </ItemGroup>
 
 </Project>
