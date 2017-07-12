@@ -10,6 +10,8 @@ using Microsoft.Extensions.Options;
 using GeekText_Team7.Models;
 using GeekText_Team7.Models.ManageViewModels;
 using GeekText_Team7.Services;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace GeekText_Team7.Controllers
 {
@@ -278,7 +280,7 @@ namespace GeekText_Team7.Controllers
 
         //GET: /Manage/ManageLogins
         [HttpGet]
-        public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
+        public async Task<IActionResult> ManageLogins(IndexViewModel model, ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
@@ -293,11 +295,20 @@ namespace GeekText_Team7.Controllers
             var userLogins = await _userManager.GetLoginsAsync(user);
             var otherLogins = _signInManager.GetExternalAuthenticationSchemes().Where(auth => userLogins.All(ul => auth.AuthenticationScheme != ul.LoginProvider)).ToList();
             ViewData["ShowRemoveButton"] = user.PasswordHash != null || userLogins.Count > 1;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await model.AvatarImage.CopyToAsync(memoryStream);
+                user.AvatarImage = memoryStream.ToArray();
+            }
+
             return View(new ManageLoginsViewModel
             {
                 CurrentLogins = userLogins,
                 OtherLogins = otherLogins
             });
+
+
         }
 
         //
@@ -339,6 +350,31 @@ namespace GeekText_Team7.Controllers
                 await HttpContext.Authentication.SignOutAsync(_externalCookieScheme);
             }
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
+        }
+
+        [HttpPost("UploadFiles")]
+        public async Task<IActionResult> Post(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
+
+            // full path to file in temp location
+            var filePath = Path.GetTempFileName();
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+
+            // process uploaded files
+            // Don't rely on or trust the FileName property without validation.
+
+            return Ok(new { count = files.Count, size, filePath });
         }
 
         #region Helpers

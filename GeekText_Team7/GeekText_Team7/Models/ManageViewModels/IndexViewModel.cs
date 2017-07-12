@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace GeekText_Team7.Models.ManageViewModels
 {
@@ -17,5 +18,7 @@ namespace GeekText_Team7.Models.ManageViewModels
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        public IFormFile AvatarImage { get; set; } 
     }
 }

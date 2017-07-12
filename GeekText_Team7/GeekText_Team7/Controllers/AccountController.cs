@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using GeekText_Team7.Models;
 using GeekText_Team7.Models.AccountViewModels;
 using GeekText_Team7.Services;
+using System.IO;
 
 namespace GeekText_Team7.Controllers
 {
@@ -109,6 +110,7 @@ namespace GeekText_Team7.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {

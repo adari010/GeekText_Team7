@@ -7,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using GeekText_Team7.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using System.IO;
+using GeekText_Team7.Data;
 
 namespace GeekText_Team7.Controllers
 {
