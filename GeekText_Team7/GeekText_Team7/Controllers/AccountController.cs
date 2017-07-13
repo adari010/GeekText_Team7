@@ -73,10 +73,16 @@ namespace GeekText_Team7.Controllers
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
+
+
+                /*
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
+                */
+
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning(2, "User account locked out.");
@@ -114,7 +120,7 @@ namespace GeekText_Team7.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -146,6 +152,10 @@ namespace GeekText_Team7.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+
+
+
+        /*
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -234,6 +244,12 @@ namespace GeekText_Team7.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(model);
         }
+
+        */
+
+
+
+
 
         // GET: /Account/ConfirmEmail
         [HttpGet]
@@ -344,6 +360,13 @@ namespace GeekText_Team7.Controllers
             return View();
         }
 
+
+
+
+
+
+
+        /**
         //
         // GET: /Account/SendCode
         [HttpGet]
@@ -444,6 +467,13 @@ namespace GeekText_Team7.Controllers
                 return View(model);
             }
         }
+
+
+        */
+
+
+
+
 
         //
         // GET /Account/AccessDenied

@@ -68,8 +68,34 @@ namespace GeekText_Team7.Controllers
                 Logins = await _userManager.GetLoginsAsync(user),
                 BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
             };
+            
             return View(model);
         }
+
+
+
+        // POST: /Account/Index
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model.AvatarImage.CopyToAsync(memoryStream);
+                    user.AvatarImage = memoryStream.ToArray();
+                }
+            }
+            return View();
+        }
+
 
         //
         // POST: /Manage/RemoveLogin
@@ -296,12 +322,6 @@ namespace GeekText_Team7.Controllers
             var otherLogins = _signInManager.GetExternalAuthenticationSchemes().Where(auth => userLogins.All(ul => auth.AuthenticationScheme != ul.LoginProvider)).ToList();
             ViewData["ShowRemoveButton"] = user.PasswordHash != null || userLogins.Count > 1;
 
-            using (var memoryStream = new MemoryStream())
-            {
-                await model.AvatarImage.CopyToAsync(memoryStream);
-                user.AvatarImage = memoryStream.ToArray();
-            }
-
             return View(new ManageLoginsViewModel
             {
                 CurrentLogins = userLogins,
@@ -358,7 +378,7 @@ namespace GeekText_Team7.Controllers
             long size = files.Sum(f => f.Length);
 
             // full path to file in temp location
-            var filePath = Path.GetTempFileName();
+            var filePath = "C:\\Users\\Big Babby\\Source\\Repos\\GeekText_TheSevens\\GeekText_Team7\\GeekText_Team7\\GeekText_Team7\\wwwroot\\images\\AvatarImage\\Test.jpg";
 
             foreach (var formFile in files)
             {
@@ -374,7 +394,7 @@ namespace GeekText_Team7.Controllers
             // process uploaded files
             // Don't rely on or trust the FileName property without validation.
 
-            return Ok(new { count = files.Count, size, filePath });
+            return RedirectToAction(nameof(Index));
         }
 
         #region Helpers

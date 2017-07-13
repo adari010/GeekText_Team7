@@ -19,6 +19,7 @@ namespace GeekText_Team7.Models.ManageViewModels
 
         public bool BrowserRemembered { get; set; }
 
-        public IFormFile AvatarImage { get; set; } 
+        public IFormFile AvatarImage { get; set; }
+        public string Email { get; internal set; }
     }
 }

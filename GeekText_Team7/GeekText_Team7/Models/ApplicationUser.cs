@@ -8,6 +8,7 @@ namespace GeekText_Team7.Models
 {
     public class ApplicationUser : IdentityUser
     {
+
         public byte[] AvatarImage { get; set; }
     }
 }
