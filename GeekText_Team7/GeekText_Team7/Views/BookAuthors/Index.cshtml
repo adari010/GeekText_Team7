@@ -1,4 +1,4 @@
-@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+@model IEnumerable<GeekText_Team7.Models.BookAuthor>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,17 +6,42 @@
 
 <h2>Index</h2>
 
-
-<div class="active">
-    @foreach (var item in Model.BookAuthor)
-    {
-            <img src="~/images/Books/@(Html.DisplayFor(modelItem => item.Book.Isbn)).jpg"/>
-            <p>
-                <br />
-                @Html.DisplayFor(modelItem => item.Author.FirstName) 
-                @Html.DisplayFor(modelItem => item.Author.LastName)
-                <br />
-                @Html.ActionLink(@item.Book.Title, "Details", item.Book.Id)
-            </p>
-    }
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Order)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

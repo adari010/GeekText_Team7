@@ -25,11 +25,7 @@ namespace GeekText_Team7.Controllers.Api
             var viewModel = new BookIndexData();
             viewModel.BookAuthor = await _context.BookAuthor
                 .Include(c => c.Book)
-                    .ThenInclude(c => c.BookAuthor)
-                    .ThenInclude(c => c.Author)
                 .Include(b => b.Author)
-                    .ThenInclude(c => c.BookAuthor)
-                    .ThenInclude(c => c.Book)
                 .AsNoTracking()
                 .ToListAsync();
 
