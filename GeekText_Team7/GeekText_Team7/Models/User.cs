@@ -20,8 +20,8 @@ namespace GeekText_Team7.Models
         public string State { get; set; }
         public string ZipCode { get; set; }
 
-        public ICollection<CreditCard> CreditCards { get; set; }
-        public ICollection<Book> Books { get; set; }
+        public ICollection<CreditCard> CreditCard { get; set; }
+        public ICollection<Book> Book { get; set; }
 
     }
 }
