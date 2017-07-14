@@ -10,33 +10,28 @@ using GeekText_Team7.Models.BookAuthorViewModels;
 
 namespace GeekText_Team7.Controllers.Api
 {
-    public class BookAuthorsController : Controller
+    public class AuthorsController : Controller
     {
         private readonly BookStoreSummer17Context _context;
 
-        public BookAuthorsController(BookStoreSummer17Context context)
+        public AuthorsController(BookStoreSummer17Context context)
         {
             _context = context;    
         }
 
-        // GET: BookAuthors
+        // GET: Authors
         public async Task<IActionResult> Index()
         {
             var viewModel = new BookIndexData();
-            viewModel.BookAuthor = await _context.BookAuthor
-                .Include(c => c.Book)
-                    .ThenInclude(c => c.BookAuthor)
-                    .ThenInclude(c => c.Author)
-                .Include(b => b.Author)
-                    .ThenInclude(c => c.BookAuthor)
-                    .ThenInclude(c => c.Book)
+            viewModel.Author = await _context.Author
+                .Include(c => c.BookAuthor)
                 .AsNoTracking()
                 .ToListAsync();
 
             return View(viewModel);
         }
 
-        // GET: BookAuthors/Details/5
+        // GET: Authors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,45 +39,39 @@ namespace GeekText_Team7.Controllers.Api
                 return NotFound();
             }
 
-            var bookAuthor = await _context.BookAuthor
-                .Include(b => b.Author)
-                .Include(b => b.Book)
-                .SingleOrDefaultAsync(m => m.BookId == id);
-            if (bookAuthor == null)
+            var author = await _context.Author
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (author == null)
             {
                 return NotFound();
             }
 
-            return View(bookAuthor);
+            return View(author);
         }
 
-        // GET: BookAuthors/Create
+        // GET: Authors/Create
         public IActionResult Create()
         {
-            ViewData["AuthorId"] = new SelectList(_context.Author, "Id", "Id");
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id");
             return View();
         }
 
-        // POST: BookAuthors/Create
+        // POST: Authors/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BookId,AuthorId,Order")] BookAuthor bookAuthor)
+        public async Task<IActionResult> Create([Bind("Id,Biography,FirstName,LastName")] Author author)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(bookAuthor);
+                _context.Add(author);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "Id", "Id", bookAuthor.AuthorId);
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id", bookAuthor.BookId);
-            return View(bookAuthor);
+            return View(author);
         }
 
-        // GET: BookAuthors/Edit/5
+        // GET: Authors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,24 +79,22 @@ namespace GeekText_Team7.Controllers.Api
                 return NotFound();
             }
 
-            var bookAuthor = await _context.BookAuthor.SingleOrDefaultAsync(m => m.BookId == id);
-            if (bookAuthor == null)
+            var author = await _context.Author.SingleOrDefaultAsync(m => m.Id == id);
+            if (author == null)
             {
                 return NotFound();
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "Id", "Id", bookAuthor.AuthorId);
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id", bookAuthor.BookId);
-            return View(bookAuthor);
+            return View(author);
         }
 
-        // POST: BookAuthors/Edit/5
+        // POST: Authors/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("BookId,AuthorId,Order")] BookAuthor bookAuthor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Biography,FirstName,LastName")] Author author)
         {
-            if (id != bookAuthor.BookId)
+            if (id != author.Id)
             {
                 return NotFound();
             }
@@ -116,12 +103,12 @@ namespace GeekText_Team7.Controllers.Api
             {
                 try
                 {
-                    _context.Update(bookAuthor);
+                    _context.Update(author);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookAuthorExists(bookAuthor.BookId))
+                    if (!AuthorExists(author.Id))
                     {
                         return NotFound();
                     }
@@ -132,12 +119,10 @@ namespace GeekText_Team7.Controllers.Api
                 }
                 return RedirectToAction("Index");
             }
-            ViewData["AuthorId"] = new SelectList(_context.Author, "Id", "Id", bookAuthor.AuthorId);
-            ViewData["BookId"] = new SelectList(_context.Book, "Id", "Id", bookAuthor.BookId);
-            return View(bookAuthor);
+            return View(author);
         }
 
-        // GET: BookAuthors/Delete/5
+        // GET: Authors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -145,32 +130,30 @@ namespace GeekText_Team7.Controllers.Api
                 return NotFound();
             }
 
-            var bookAuthor = await _context.BookAuthor
-                .Include(b => b.Author)
-                .Include(b => b.Book)
-                .SingleOrDefaultAsync(m => m.BookId == id);
-            if (bookAuthor == null)
+            var author = await _context.Author
+                .SingleOrDefaultAsync(m => m.Id == id);
+            if (author == null)
             {
                 return NotFound();
             }
 
-            return View(bookAuthor);
+            return View(author);
         }
 
-        // POST: BookAuthors/Delete/5
+        // POST: Authors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var bookAuthor = await _context.BookAuthor.SingleOrDefaultAsync(m => m.BookId == id);
-            _context.BookAuthor.Remove(bookAuthor);
+            var author = await _context.Author.SingleOrDefaultAsync(m => m.Id == id);
+            _context.Author.Remove(author);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        private bool BookAuthorExists(int id)
+        private bool AuthorExists(int id)
         {
-            return _context.BookAuthor.Any(e => e.BookId == id);
+            return _context.Author.Any(e => e.Id == id);
         }
     }
 }

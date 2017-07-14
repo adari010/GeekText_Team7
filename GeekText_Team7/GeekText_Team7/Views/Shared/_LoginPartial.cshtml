@@ -1,6 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using GeekText_Team7.Models
-@model GeekText_Team7.Models.AspNetUsers
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -9,12 +8,6 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right" style="margin: 25px 0px 25px 0px">
         <ul class="nav navbar-nav navbar-right">
-            @{
-                if (Model.ProfileImage != null)
-                {
-                    <li><img src="~/images/ProfileImages/@(Model.ProfileImage).jpg" /></li>
-                }
-            }
             <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
