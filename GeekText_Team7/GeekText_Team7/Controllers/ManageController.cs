@@ -10,6 +10,8 @@ using Microsoft.Extensions.Options;
 using GeekText_Team7.Models;
 using GeekText_Team7.Models.ManageViewModels;
 using GeekText_Team7.Services;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace GeekText_Team7.Controllers
 {
@@ -69,6 +71,57 @@ namespace GeekText_Team7.Controllers
             return View(model);
         }
 
+        // POST: /Manage/Index
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email
+                };
+                using (var memoryStream = new MemoryStream())
+                {
+                    await model.ProfileImage.CopyToAsync(memoryStream);
+                    user.ProfileImage = memoryStream.ToArray();
+                }
+                // additional logic omitted
+
+                // Don't rely on or trust the model.AvatarImage.FileName property
+                // without validation.
+            }
+
+            return View();
+        }
+
+        [HttpPost("UploadFiles")]
+        public async Task<IActionResult> Post(List<IFormFile> files)
+        {
+            long size = files.Sum(f => f.Length);
+
+            // full path to file in temp location
+            var filePath = "C:\\Users\\Michael\\Source\\Repos\\GeekText_Team7\\GeekText_Team7\\GeekText_Team7\\wwwroot\\images\\ProfileImages\\test.jpg";
+
+            foreach (var formFile in files)
+            {
+                if (formFile.Length > 0)
+                {
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await formFile.CopyToAsync(stream);
+                    }
+                }
+            }
+
+            // process uploaded files
+            // Don't rely on or trust the FileName property without validation.
+
+            return RedirectToAction(nameof(Index));
+        }
+
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
@@ -88,6 +141,8 @@ namespace GeekText_Team7.Controllers
             }
             return RedirectToAction(nameof(ManageLogins), new { Message = message });
         }
+
+
 
         //
         // GET: /Manage/AddPhoneNumber
