@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace GeekText_Team7.Models
 {
-    public class User : IdentityUser 
+    public class User
     {
         public int ID { get; set; }
         public DateTime DOB { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Sex { get; set; }
-        public string email { get; set; }
+        public string Email { get; set; }
         public string Alias { get; set; }
         public string Street { get; set; }
         public string City { get; set; }

@@ -23,9 +23,20 @@ namespace GeekText_Team7.Controllers.Api
         public async Task<IActionResult> Index()
         {
             var viewModel = new BookIndexData();
+
             viewModel.BookAuthor = await _context.BookAuthor
                 .Include(c => c.Book)
                 .Include(b => b.Author)
+                .AsNoTracking()
+                .ToListAsync();
+
+            viewModel.Book = await _context.Book
+                .Include(c => c.BookAuthor)
+                .AsNoTracking()
+                .ToListAsync();
+
+            viewModel.Author = await _context.Author
+                .Include(c => c.BookAuthor)
                 .AsNoTracking()
                 .ToListAsync();
 
@@ -33,23 +44,71 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: BookAuthors/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> BookDetails(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var bookAuthor = await _context.BookAuthor
+            var viewModel = new BookIndexData();
+
+            viewModel.BookAuthor = await _context.BookAuthor
+                .Include(c => c.Book)
                 .Include(b => b.Author)
-                .Include(b => b.Book)
-                .SingleOrDefaultAsync(m => m.BookId == id);
-            if (bookAuthor == null)
+                .AsNoTracking()
+                .ToListAsync();
+
+            viewModel.Book = await _context.Book
+                .Where(m => m.Id == id)
+                .ToListAsync();
+
+            viewModel.Author= await _context.Author
+                .Include(c => c.BookAuthor)
+                .AsNoTracking()
+                .ToListAsync();
+
+
+            if (viewModel == null)
             {
                 return NotFound();
             }
 
-            return View(bookAuthor);
+            return View(viewModel);
+        }
+
+        // GET: BookAuthors/Details/5
+        public async Task<IActionResult> AuthorDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new BookIndexData();
+
+            viewModel.BookAuthor = await _context.BookAuthor
+                .Include(c => c.Book)
+                .Include(b => b.Author)
+                .AsNoTracking()
+                .ToListAsync();
+
+            viewModel.Author = await _context.Author
+                .Where(m => m.Id == id)
+                .ToListAsync();
+
+            viewModel.Book = await _context.Book
+                .Include(c => c.BookAuthor)
+                .AsNoTracking()
+                .ToListAsync();
+
+
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
         }
 
         // GET: BookAuthors/Create

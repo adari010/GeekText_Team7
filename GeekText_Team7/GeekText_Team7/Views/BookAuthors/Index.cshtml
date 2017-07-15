@@ -8,15 +8,23 @@
 
 
 <div class="active">
-    @foreach (var item in Model.BookAuthor)
+    @foreach (var book in Model.Book)
     {
-            <img src="~/images/Books/@(Html.DisplayFor(modelItem => item.Book.Isbn)).jpg"/>
+            <img src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg"/>
             <p>
-                <br />
-                @Html.DisplayFor(modelItem => item.Author.FirstName) 
-                @Html.DisplayFor(modelItem => item.Author.LastName)
-                <br />
-                @Html.ActionLink(@item.Book.Title, "Details", item.Book.Id)
+                @foreach (var author in Model.Author)
+                {
+                    foreach (var bookauthor in Model.BookAuthor)
+                    {
+                        if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
+                        {
+                            <br />
+                            <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                            <br />
+                        }
+                    }
+                }
+                <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
             </p>
     }
 </div>
