@@ -12,10 +12,14 @@
     <dl class="dl-horizontal">
         @foreach (var item in Model.Book)
         {
-            <dt><img width="80%" height="80%" src="~/images/Books/@(Html.DisplayFor(modelItem => item.Isbn)).jpg" /></dt>
+            <dt><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => item.Isbn)).jpg" /></dt>
 
             <dd>@Html.DisplayFor(modelItem => item.Title) <br /> @Html.DisplayFor(modelItem => item.Description)</dd>
             <dt><br /></dt>
         }
     </dl>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
 </div>

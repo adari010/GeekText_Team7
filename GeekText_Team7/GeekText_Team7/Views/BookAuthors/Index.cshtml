@@ -6,25 +6,144 @@
 
 <h2>Index</h2>
 
+<script src="~/js/carousel.js"></script>
+
+<environment names="Development">
+    <link rel="stylesheet" href="~/css/Carousel.css" asp-append-version="true" />
+</environment>
+<environment names="Staging,Production">
+    <link rel="stylesheet" href="~/css/Carousel.min.css" asp-append-version="true" />
+</environment>
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+
+
+<div class="container">
+    <h1>Use Bootstrap's carousel to show multiple items per slide.</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="carousel slide multi-item-carousel" id="theCarousel">
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/f44336/000000" class="img-responsive"></a></div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/e91e63/000000" class="img-responsive"></a></div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/9c27b0/000000" class="img-responsive"></a></div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/673ab7/000000" class="img-responsive"></a></div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/4caf50/000000" class="img-responsive"></a></div>
+                    </div>
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a></div>
+                    </div>
+                    <!-- add  more items here -->
+                    <!-- Example item start:  -->
+
+                    <div class="item">
+                        <div class="col-xs-4"><a href="#1"><img src="http://placehold.it/300/8bc34a/000000" class="img-responsive"></a></div>
+                    </div>
+
+                    <!--  Example item end -->
+                </div>
+                <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="dropdown">
+    <span><u>Sort By...</u></span>
+    <div class="dropdown-content">
+        <a asp-action="index" asp-route-id="1">Genre</a>
+            <ul style="list-style-type:none">
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li>
+            </ul>
+            <a asp-action="index" asp-route-id="2">Price</a>
+            <br />
+            <a asp-action="index" asp-route-id="3">Orders</a>
+            <br />
+            <a asp-action="index" asp-route-id="4">Tech Valley Times</a>
+</div>
+</div>
+
+
+
+@{ int count = 0;}
 
 <div class="active">
-    @foreach (var book in Model.Book)
-    {
-            <img src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg"/>
-            <p>
-                @foreach (var author in Model.Author)
+    <table class="table">
+        <tr>
+            @foreach (var book in Model.Book)
+            {
+                <td width="400">
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    @Html.Raw("<br />")
+                    @foreach (var author in Model.Author)
                 {
                     foreach (var bookauthor in Model.BookAuthor)
                     {
                         if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
                         {
-                            <br />
-                            <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
-                            <br />
+                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                                @Html.Raw("<br />")
+                            }
                         }
                     }
+                    <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
+                    <br />
+                    Price: $@Html.DisplayFor(modelitem => book.Price)
+                    <br />
+                    Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
+                    <br />
+                    Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)
+                    <br />
+                </td>
+                count++;
+                if (count % 4 == 0)
+                {
+                    @Html.Raw("</tr>")
+                    @Html.Raw("<tr>")
                 }
-                <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
-            </p>
-    }
+            }
+        </tr>
+    </table>
 </div>

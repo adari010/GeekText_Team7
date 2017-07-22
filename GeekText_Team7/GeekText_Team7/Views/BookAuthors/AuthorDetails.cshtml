@@ -11,41 +11,50 @@
     <hr />
     @foreach (var item in Model.Author)
     {
-        @Html.DisplayFor(modelItem => item.FirstName) 
-        @Html.DisplayFor(modelItem => item.LastName)
+        <strong>@Html.DisplayFor(modelItem => item.FirstName)</strong>
+        <strong>@Html.DisplayFor(modelItem => item.LastName)</strong>
         <br />
         @Html.DisplayFor(modelItem => item.Biography)
+        <br />
     }
 </div>
-
+<br />
+    Books by this author:
+<br />
+<br />
 <div>
-    <p>
-        Books by this author:
-
-        <dl class="dl-horizontal">
-                @foreach (var book in Model.Book)
+    <table>
+        
+            @foreach (var book in Model.Book)
+            {
+                foreach (var bookauthor in Model.BookAuthor)
                 {
-                    foreach (var bookauthor in Model.BookAuthor)
+                    foreach (var item in Model.Author)
                     {
-                        foreach (var item in Model.Author)
+                        <tr>
+                        @if (item.Id == bookauthor.AuthorId)
                         {
-                            if (item.Id == bookauthor.AuthorId)
+
+                            if (book.Id == bookauthor.BookId)
                             {
-                                if (book.Id == bookauthor.BookId)
-                                {
-                                    <dt><img width="80%" height="80%" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" /></dt>
-                                    
-                                    <dd>@Html.DisplayFor(modelItem => book.Title) <br /> @Html.DisplayFor(modelItem => book.Description)</dd>
-                                    <dt><br /></dt>
-                                }
+                                <td>
+                                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                                    <br />
+                                    <br />
+                                    <strong>@Html.DisplayFor(modelItem => book.Title)</strong>
+                                    <br /> 
+                                    <br />
+                                    @Html.DisplayFor(modelItem => book.Description)
+                                    <br />
+                                    <br />
+                                </td>
                             }
                         }
+                        </tr>
                     }
                 }
-        </dl>
-    </p>
-
-
+            }
+    </table>
 </div>
 
 <div>

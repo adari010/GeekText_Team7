@@ -1,0 +1,14 @@
+UPDATE BookStoreSummer17.dbo.Book SET Genre = 'Game' WHERE Genre = 'Game
+';
+
+UPDATE BookStoreSummer17.dbo.Book SET Genre = 'Scifi' WHERE Genre = 'Scifi
+';
+
+UPDATE BookStoreSummer17.dbo.Book SET Genre = 'Fantasy' WHERE Genre = 'Fantasy
+';
+
+UPDATE BookStoreSummer17.dbo.Book SET Genre = 'GraphicNovel' WHERE Genre = 'GraphicNovel
+';
+
+UPDATE BookStoreSummer17.dbo.Book SET Genre = 'Computer' WHERE Genre = 'Computer
+';

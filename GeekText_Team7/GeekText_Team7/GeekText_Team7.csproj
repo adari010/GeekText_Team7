@@ -11,6 +11,17 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-GeekText_Team7-566450b9-c4e5-413f-843c-7d342b66ea08</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\css\Carousel.css" />
+    <Content Include="wwwroot\css\Carousel.min.css" />
+    <Content Include="wwwroot\css\Cart - Copy.css">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="wwwroot\js\carousel.js">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />

@@ -20,23 +20,57 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: BookAuthors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int id, string genre)
         {
             var viewModel = new BookIndexData();
 
-            viewModel.BookAuthor = await _context.BookAuthor
-                .Include(c => c.Book)
-                .Include(b => b.Author)
+            if (id == 1 && genre != null)
+            {
+                viewModel.Book = await _context.Book
+                .Where(b => b.Genre.Equals(genre))
+                .OrderBy(b => b.Title)
+                .ToListAsync();
+            }
+            else if (id == 1 && genre == null)
+            {
+                viewModel.Book = await _context.Book
+                .OrderBy(b => b.Genre)
+                .ToListAsync();
+            }
+            else if (id == 2)
+            {
+                viewModel.Book = await _context.Book
+                .OrderBy(b => b.Price)
                 .AsNoTracking()
                 .ToListAsync();
+            }
+            else if (id == 3)
+            {
+                viewModel.Book = await _context.Book
+                    .OrderByDescending(b => b.Orders)
+                .AsNoTracking()
+                .ToListAsync();
+            }
+            else if (id == 4)
+            {
+                viewModel.Book = await _context.Book
+                    .OrderByDescending(b => b.TechValleyTimesOrders)
+                .AsNoTracking()
+                .ToListAsync();
+            }
+            else
+            {
+                viewModel.Book = await _context.Book
+                .OrderBy(b => b.Title)
+                .AsNoTracking()
+                .ToListAsync();
+            }
 
-            viewModel.Book = await _context.Book
-                .Include(c => c.BookAuthor)
+            viewModel.BookAuthor = await _context.BookAuthor
                 .AsNoTracking()
                 .ToListAsync();
 
             viewModel.Author = await _context.Author
-                .Include(c => c.BookAuthor)
                 .AsNoTracking()
                 .ToListAsync();
 
