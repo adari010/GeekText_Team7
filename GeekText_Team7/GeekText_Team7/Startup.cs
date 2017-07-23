@@ -14,6 +14,7 @@ using Newtonsoft.Json.Serialization;
 using GeekText_Team7.Data;
 using GeekText_Team7.Models;
 using GeekText_Team7.Services;
+using Microsoft.AspNetCore.Identity;
 
 namespace GeekText_Team7
 {
@@ -71,6 +72,8 @@ namespace GeekText_Team7
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddScoped<SignInManager<User>, SignInManager<User>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
