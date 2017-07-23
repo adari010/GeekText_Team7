@@ -16,13 +16,11 @@ namespace GeekText_Team7.Controllers
     {
 
         private IConfigurationRoot _config;
-        private IBookStoreRepository _repository;
         private ILogger<HomeController> _logger;
 
-        public HomeController(IConfigurationRoot config, IBookStoreRepository repository, ILogger<HomeController> logger)
+        public HomeController(IConfigurationRoot config, ILogger<HomeController> logger)
         {
             _config = config;
-            _repository = repository;
             _logger = logger;
         }
         public IActionResult Index()

@@ -1,0 +1,25 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>BookAuthor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @foreach (var item in Model.Book)
+        {
+            <dt><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => item.Isbn)).jpg" /></dt>
+
+            <dd>@Html.DisplayFor(modelItem => item.Title) <br /> @Html.DisplayFor(modelItem => item.Description)</dd>
+            <dt><br /></dt>
+        }
+    </dl>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

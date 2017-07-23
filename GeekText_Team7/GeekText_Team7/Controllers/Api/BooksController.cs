@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GeekText_Team7.Models;
+using GeekText_Team7.Models.BookAuthorViewModels;
 
 namespace GeekText_Team7.Controllers.Api
 {
@@ -21,12 +22,17 @@ namespace GeekText_Team7.Controllers.Api
         // GET: Books
         public async Task<IActionResult> Index()
         {
-            var bookStoreSummer17Context = _context.Book.Include(b => b.User);
-            return View(await bookStoreSummer17Context.ToListAsync());
+            var viewModel = new BookIndexData();
+            viewModel.Book = await _context.Book
+                .Include(c => c.BookAuthor)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(viewModel);
         }
 
         // GET: Books/Details/5
-        public async Task<IActionResult> Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -69,7 +75,7 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: Books/Edit/5
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -122,7 +128,7 @@ namespace GeekText_Team7.Controllers.Api
         }
 
         // GET: Books/Delete/5
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {

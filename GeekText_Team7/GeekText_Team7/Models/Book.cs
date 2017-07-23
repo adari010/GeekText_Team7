@@ -16,7 +16,9 @@ namespace GeekText_Team7.Models
         public int UserId { get; set; }
         public string Description { get; set; }
         public string Genre { get; set; }
-
+        public int Orders { get; set; }
+        public int TechValleyTimesOrders { get; set; }
+        public double Price { get; set; }
         public virtual ICollection<BookAuthor> BookAuthor { get; set; }
         public virtual User User { get; set; }
     }

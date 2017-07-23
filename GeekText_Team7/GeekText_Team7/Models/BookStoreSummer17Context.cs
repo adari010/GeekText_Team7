@@ -65,7 +65,7 @@ namespace GeekText_Team7.Models
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.Dob)
+                entity.Property(e => e.DOB)
                     .HasColumnName("DOB")
                     .HasDefaultValueSql("'0001-01-01T00:00:00.000'");
             });
