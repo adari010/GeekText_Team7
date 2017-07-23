@@ -91,7 +91,7 @@ namespace GeekText_Team7.Controllers
                 using (var memoryStream = new MemoryStream())
                 {
                     await model.AvatarImage.CopyToAsync(memoryStream);
-                    user.AvatarImage = memoryStream.ToArray();
+                    //user.AvatarImage = memoryStream.ToArray();
                 }
             }
             return View();

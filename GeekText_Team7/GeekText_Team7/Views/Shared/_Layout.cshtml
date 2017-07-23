@@ -65,8 +65,13 @@
                     </div>
                 </form>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a asp-area="" asp-controller="Home" style="margin: 25px 0px 25px 0px" asp-action="Cart"><span class="glyphicon-shopping-cart:before"></span> Cart</a></li>
+                <ul class="nav navbar-nav" style="color: white; ">
+                    <li>@Html.ActionLink("Checkout", "Index", "Checkout")</li>
+                    <li><a href="#" onclick="ShowCart()">Cart (<span id="cartAmount">0</span>)</a>
+                        <ul id="cartItems" class="" style="width: 350px; right:-50px; display: none; padding: 10px 20px; position: absolute; background: white;">
+                        </ul>
+                    </li>
+                    
                 </ul>
                 @await Html.PartialAsync("_LoginPartial")
             </div>

@@ -1,14 +1,35 @@
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Http
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 
 @{
-    ViewData["Title"] = "CreditCard";
-}
+    var userod = UserManager.GetUserId(User);
+    var firstname = "";
+    var lastname = "";
+    var ccnumber = "";
+    var billaddr = "";
+    var zipcode = "";
+    var cvv = "";
+    var expmonth = "";
+    var expyear = ""
 
-<h2>CreditCard</h2>
+    if (IsPost)
+    {
+        firstname = Request.Form["firstname"];
+        genre = Request.Form["lastname"];
+        year = Request.Form["ccnumber"];
+        var db = Database.Open("WebPagesMovies");
+        var insertCommand = "INSERT INTO Movies (Title, Genre, Year) Values(@0, @1, @2)";
+        db.Execute(insertCommand, title, genre, year);
+        Response.Redirect("~/Movies");
+    }
+}
+<!DOCTYPE html>
 <html>
 <head>
     <title>Add Credit Card to Profile</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    
     <style type="text/css">
         h2 {
             text-align: center;
@@ -96,7 +117,6 @@
                             background-color: #28739E;
                         }
     </style>
-   
 </head>
 <body>
     <h2>
@@ -261,7 +281,7 @@
                         creditCardForm.city.$invalid || creditCardForm.state.$dirty &&
                         creditCardForm.state.$invalid || creditCardForm.zipcode.$dirty &&
                         creditCardForm.zipcode.$invalid"
-                                    ng-click="insertData()">
+                                    ng-click="saveData()">
                                 Save Credit Card To Your Account
                             </button>
                         </li>
@@ -269,34 +289,40 @@
                 </form>
             </div>
             <script>
-         var mainApp = angular.module("creditCardRegistration", []);
+                var mainApp = angular.module("creditCardRegistration", []);
 
-         mainApp.controller("cardController", function($scope,$http) {
-            $scope.reset = function(){
-               $scope.firstName = "First Name";
-               $scope.lastName = "Last Name";
-               $scope.ccNumber = "Credit Card Number";
-               $scope.billAddr = "Billing Street Address"
-               $scope.city = "City"
-               $scope.state = "State"
-               $scope.zipCode = "Zip Code"
-               $scope.cvv = "CVV";
-               $scope.expMonth = "Month (1-12)";
-               $scope.expYear = "Year (YYYY)";
-            }
-            $scope.insertData = function(){
-            $http.post("insert.php", {
-            	'firstname':$scope.firstName,
-            	'lastname':$scope.lastName,
-            	'ccnumber':$scope.ccNumber,
-            	'billaddr':$scope.billAddr,
-            	'cvv':$scope.cvv,
-            	'expmonth':$scope.expMonth,
-            	'expyear':$scope.expYear})
+                mainApp.controller("cardController", function ($scope, $http) {
+                    $scope.reset = function () {
 
-            .success(function(data,status,headers,config){console.log("Data Inserted Successfully");});}
-            $scope.reset();
-         });
+                        $scope.firstname = "First Name";
+                        $scope.lastname = "Last Name";
+                        $scope.ccnumber = "Credit Card Number";
+                        $scope.billaddr = "Billing Street Address"
+                        $scope.city = "City"
+                        $scope.state = "State"
+                        $scope.zipcode = "Zip Code"
+                        $scope.cvv = "CVV";
+                        $scope.expmonth = "Month (1-12)";
+                        $scope.expyear = "Year (YYYY)";
+                        $scope.userid = UserManager.GetUserId(User);
+                    }
+                   @* $scope.insertData = function () {
+                        $http.post("insert.php", {
+                            'userid': $scope.userid,
+                            'firstname': $scope.firstname,
+                            'lastname': $scope.lastname,
+                            'ccnumber': $scope.ccnumber,
+                            'billaddr': $scope.billaddr,
+                            'cvv': $scope.cvv,
+                            'expmonth': $scope.expmonth,
+                            'expyear': $scope.expyear
+                        })
+
+
+                            .success(function (data, status, headers, config) { console.log("Data Inserted Successfully"); });
+                    }*@
+                    $scope.reset();
+                });
             </script>
 </body>
 </html>

@@ -85,27 +85,30 @@
             @foreach (var book in Model.Book)
             {
                 <td width="400">
-                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
-                    @Html.Raw("<br />")
-                    @foreach (var author in Model.Author)
+                <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                @Html.Raw("<br />")
+                @foreach (var author in Model.Author)
                 {
                     foreach (var bookauthor in Model.BookAuthor)
                     {
                         if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
                         {
-                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
-                                @Html.Raw("<br />")
-                            }
+                            <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                            @Html.Raw("<br />")
                         }
                     }
-                    <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
-                    <br />
-                    Price: $@Html.DisplayFor(modelitem => book.Price)
-                    <br />
-                    Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
-                    <br />
-                    Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)
-                    <br />
+                }
+                <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
+                <br /> 
+                <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                          
+                <br />
+                Price: $@Html.DisplayFor(modelitem => book.Price)
+                <br />
+                Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
+                <br />
+                Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)
+                <br />
                 </td>
                 count++;
                 if (count % 4 == 0)
