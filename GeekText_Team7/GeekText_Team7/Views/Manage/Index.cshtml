@@ -10,19 +10,25 @@
     <h4>Change your account settings</h4>
     <hr />
 
-    <form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
-        <div class="form-group">
-            <div class="col-md-10">
-                <p>Upload one or more files using this form:</p>
-                <input type="file" name="files" />
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" value="Upload" />
-            </div>
-        </div>
-    </form>
+
+
+
+
+    <dl class="dl-horizontal">
+        <dt>Username:</dt>
+        <dd>
+            @if (Model.HasUsername)
+            {
+                <a asp-controller="Manage" asp-action="ChangeUserName" class="btn-bracketed">Edit</a>
+            }
+            else
+            {
+                <a asp-controller="Manage" asp-action="SetUserName" class="btn-bracketed">Create</a>
+            }
+        </dd>
+    </dl>
+
+
 
 
     <dl class="dl-horizontal">
@@ -38,4 +44,40 @@
             }
         </dd>
     </dl>
+
+    <dl class="dl-horizontal">
+        <dt>Email:</dt>
+        <dd>
+            <a asp-controller="Manage" asp-action="ChangeEmail" class="btn-bracketed">Change</a>
+        </dd>
+    </dl>
+
+
+
+
+    <dl class="dl-horizontal">
+        <dt>Credit Card Info:</dt>
+        <dd>
+            <a asp-controller="Manage" asp-action="CreditCard" class="btn-bracketed">Edit</a>
+        </dd>
+    </dl>
+
+
 </div>
+
+<div>
+<form method="post" enctype="multipart/form-data" asp-controller="UploadFiles" asp-action="Index">
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Upload one or more files using this form:</p>
+            <input type="file" name="files" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Upload" />
+        </div>
+    </div>
+</form>
+</div>
+<br><br><br><br>

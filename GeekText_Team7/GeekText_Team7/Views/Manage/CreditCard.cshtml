@@ -1,0 +1,302 @@
+
+@{
+    ViewData["Title"] = "CreditCard";
+}
+
+<h2>CreditCard</h2>
+<html>
+<head>
+    <title>Add Credit Card to Profile</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    
+    <style type="text/css">
+        h2 {
+            text-align: center;
+        }
+
+        .form-style-1 {
+            max-width: 450px;
+            background: #FAFAFA;
+            padding: 30px;
+            margin: 50px auto;
+            box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
+            border-radius: 10px;
+            border: 6px solid #305A72;
+        }
+
+            .form-style-1 ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+
+                .form-style-1 ul li {
+                    display: block;
+                    margin-bottom: 10px;
+                    min-height: 35px;
+                }
+
+                    .form-style-1 ul li .field-style {
+                        box-sizing: border-box;
+                        -webkit-box-sizing: border-box;
+                        -moz-box-sizing: border-box;
+                        padding: 8px;
+                        outline: none;
+                        border: 1px solid #B0CFE0;
+                        -webkit-transition: all 0.30s ease-in-out;
+                        -moz-transition: all 0.30s ease-in-out;
+                        -ms-transition: all 0.30s ease-in-out;
+                        -o-transition: all 0.30s ease-in-out;
+                    }
+
+                        .form-style-1 ul li .field-style:focus {
+                            box-shadow: 0 0 5px #B0CFE0;
+                            border: 1px solid #B0CFE0;
+                        }
+
+                    .form-style-1 ul li .field-split {
+                        width: 49%;
+                    }
+
+                    .form-style-1 ul li .field-full {
+                        width: 100%;
+                    }
+
+                    .form-style-1 ul li input.align-left {
+                        float: left;
+                    }
+
+                    .form-style-1 ul li input.align-right {
+                        float: right;
+                    }
+
+                    .form-style-1 ul li textarea {
+                        width: 100%;
+                        height: 100px;
+                    }
+
+                    .form-style-1 ul li input[type="button"],
+                    .form-style-1 ul li input[type="submit"] {
+                        -moz-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                        -webkit-box-shadow: inset 0px 1px 0px 0px #3985B1;
+                        box-shadow: inset 0px 1px 0px 0px #3985B1;
+                        background-color: #216288;
+                        border: 1px solid #17445E;
+                        display: inline-block;
+                        cursor: pointer;
+                        color: #FFFFFF;
+                        padding: 8px 18px;
+                        text-decoration: none;
+                        font: 12px Arial, Helvetica, sans-serif;
+                    }
+
+                        .form-style-1 ul li input[type="button"]:hover,
+                        .form-style-1 ul li input[type="submit"]:hover {
+                            background: linear-gradient(to bottom, #2D77A2 5%, #337DA8 100%);
+                            background-color: #28739E;
+                        }
+    </style>
+   
+</head>
+<body>
+    <h2>
+        Please Input Credit Card Information<h2>
+
+            <div ng-app="creditCardRegistration" ng-controller="cardController">
+
+                <form class="form-style-1" name="creditCardForm" novalidate>
+                    <ul>
+                        <li>
+                            <font size="3">Cardholder's First Name</font><br>
+                            <input name="firstname" type="text" onfocus="if(this.value == 'First Name'){this.value = '';}" ng-model="firstName" ng-minlength="3" required>
+                            <span style="color:red" ng-show="creditCardForm.firstname.$dirty && creditCardForm.firstname.$invalid">
+                                <span ng-show="creditCardForm.firstname.$error.required:"> <br><font size="2">Please enter Cardholder's First Name.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">Cardholder's Last Name</font><br>
+                            <input name="lastname" type="text" onfocus="if(this.value == 'Last Name'){this.value = '';}" ng-model="lastName" ng-minlength="3" required>
+                            <span style="color:red" ng-show="creditCardForm.lastname.$dirty && creditCardForm.lastname.$invalid">
+                                <span ng-show="creditCardForm.lastname.$error.required:"> <br><font size="2">Please enter Cardholder's Last Name.</span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">Credit Card Number</font><br>
+                            <input name="ccnumber" type="text" onfocus="if(this.value == 'Credit Card Number'){this.value = '';}" pattern=[0-9]{16} ng-model="ccNumber" ng-minlength="16" ng-maxlength="16" required>
+                            <span style="color:red" ng-show="creditCardForm.ccnumber.$dirty && creditCardForm.ccnumber.$invalid">
+                                <span ng-show="creditCardForm.ccnumber.$error.required:"> <br><font size="2">Please enter the 16-digit Credit Card Number with no dashes or symbols (NUMBERS ONLY) located on the front of your card.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">Billing Street Address</font><br>
+                            <input name="billaddr" type="text" onfocus="if(this.value == 'Billing Street Address'){this.value = '';}" ng-model="billAddr" required>
+                            <span style="color:red" ng-show="creditCardForm.billaddr.$dirty && creditCardForm.billaddr.$invalid">
+                                <span ng-show="creditCardForm.billaddr.$error.required:"> <br><font size="2">Please enter the Billing Address associated with the Card Number entered.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">City</font><br>
+                            <input name="city" type="text" onfocus="if(this.value == 'City'){this.value = '';}" ng-model="city" ng-minlength="1" required>
+                            <span style="color:red" ng-show="creditCardForm.city.$dirty && creditCardForm.city.$invalid">
+                                <span ng-show="creditCardForm.city.$error.required:"><br><font size="2"> Please enter the Billing Address' City.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">State</font><br>
+                            <select name="state">
+                                <option selected>Select A US State</option>
+                                <option value="AL">AL</option>
+                                <option value="AK">AK</option>
+                                <option value="AZ">AZ</option>
+                                <option value="AR">AR</option>
+                                <option value="CA">CA</option>
+                                <option value="CO">CO</option>
+                                <option value="CT">CT</option>
+                                <option value="DE">DE</option>
+                                <option value="DC">DC</option>
+                                <option value="FL">FL</option>
+                                <option value="GA">GA</option>
+                                <option value="HI">HI</option>
+                                <option value="ID">ID</option>
+                                <option value="IL">IL</option>
+                                <option value="IN">IN</option>
+                                <option value="IA">IA</option>
+                                <option value="KS">KS</option>
+                                <option value="KY">KY</option>
+                                <option value="LA">LA</option>
+                                <option value="ME">ME</option>
+                                <option value="MD">MD</option>
+                                <option value="MA">MA</option>
+                                <option value="MI">MI</option>
+                                <option value="MN">MN</option>
+                                <option value="MS">MS</option>
+                                <option value="MO">MO</option>
+                                <option value="MT">MT</option>
+                                <option value="NE">NE</option>
+                                <option value="NV">NV</option>
+                                <option value="NH">NH</option>
+                                <option value="NJ">NJ</option>
+                                <option value="NM">NM</option>
+                                <option value="NY">NY</option>
+                                <option value="NC">NC</option>
+                                <option value="ND">ND</option>
+                                <option value="OH">OH</option>
+                                <option value="OK">OK</option>
+                                <option value="OR">OR</option>
+                                <option value="PA">PA</option>
+                                <option value="RI">RI</option>
+                                <option value="SC">SC</option>
+                                <option value="SD">SD</option>
+                                <option value="TN">TN</option>
+                                <option value="TX">TX</option>
+                                <option value="UT">UT</option>
+                                <option value="VT">VT</option>
+                                <option value="VA">VA</option>
+                                <option value="WA">WA</option>
+                                <option value="WV">WV</option>
+                                <option value="WI">WI</option>
+                                <option value="WY">WY</option>
+                            </select>
+                        </li>
+                        <li>
+                            <font size="3">ZIP Code</font><br>
+                            <input name="zipcode" type="text" onfocus="if(this.value == 'Zip Code'){this.value = '';}" pattern=[0-9]{5} ng-model="zipCode" ng-minlength="5" ng-maxlenth="5" required>
+                            <span style="color:red" ng-show="creditCardForm.zipcode.$dirty && creditCardForm.zipcode.$invalid">
+                                <span ng-show="creditCardForm.zipcode.$error.required:"><br><font size="2"> Please enter the Billing Address' 5-digit Zip Code.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">CVV</font><br>
+                            <input name="cvv" type="text" onfocus="if(this.value == 'CVV'){this.value = '';}" pattern=[0-9]{3} ng-model="cvv" ng-maxlength="3" required>
+                            <span style="color:red" ng-show="creditCardForm.cvv.$dirty && creditCardForm.cvv.$invalid">
+                                <span ng-show="creditCardForm.cvv.$error.required:"><br><font size="2"> Please enter the CVV Code found on the back of your Card.</font></span>
+                            </span>
+                        </li>
+                        <li>
+                            <font size="3">Expiration Month</font><br>
+                            <select name="expmonth">
+                                <option selected>Please select a Month</option>
+                                <option value="01">01 - January</option>
+                                <option value="02">02 - February</option>
+                                <option value="03">03 - March</option>
+                                <option value="04">04 - April</option>
+                                <option value="05">05 - May</option>
+                                <option value="06">06 - June</option>
+                                <option value="07">07 - July</option>
+                                <option value="08">08 - August</option>
+                                <option value="09">09 - September</option>
+                                <option value="10">10 - October</option>
+                                <option value="11">11 - November</option>
+                                <option value="12">12 - December</option>
+                            </select>
+                        </li>
+                        <li>
+                            <font size="3">Expiration Year</font><br>
+                            <select name="expyear">
+                                <option selected>Please select an Expiration Year</option>
+                                <option value="2017">2017</option>
+                                <option value="2018">2018</option>
+                                <option value="2019">2019</option>
+                                <option value="2020">2020</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                            </select>
+                        </li>
+
+                        <li>
+                            <button ng-click="reset()">Reset Form</button>
+
+                            <button ng-disabled="creditCardForm.firstname.$dirty &&
+                        creditCardForm.firstname.$invalid || creditCardForm.lastname.$dirty &&
+                        creditCardForm.lastname.$invalid || creditCardForm.ccnumber.$dirty &&
+                        creditCardForm.ccnumber.$invalid || creditCardForm.billaddr.$dirty && creditCardForm.billaddr.$invalid ||creditCardForm.cvv.$dirty &&
+                        creditCardForm.cvv.$invalid || creditCardForm.expmonth.$dirty &&
+                        creditCardForm.expmonth.$invalid || creditCardForm.expyear.$dirty &&
+                        creditCardForm.expyear.$invalid ||creditCardForm.city.$dirty &&
+                        creditCardForm.city.$invalid || creditCardForm.state.$dirty &&
+                        creditCardForm.state.$invalid || creditCardForm.zipcode.$dirty &&
+                        creditCardForm.zipcode.$invalid"
+                                    ng-click="insertData()">
+                                Save Credit Card To Your Account
+                            </button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <script>
+         var mainApp = angular.module("creditCardRegistration", []);
+
+         mainApp.controller("cardController", function($scope,$http) {
+            $scope.reset = function(){
+               $scope.firstName = "First Name";
+               $scope.lastName = "Last Name";
+               $scope.ccNumber = "Credit Card Number";
+               $scope.billAddr = "Billing Street Address"
+               $scope.city = "City"
+               $scope.state = "State"
+               $scope.zipCode = "Zip Code"
+               $scope.cvv = "CVV";
+               $scope.expMonth = "Month (1-12)";
+               $scope.expYear = "Year (YYYY)";
+            }
+            $scope.insertData = function(){
+            $http.post("insert.php", {
+            	'firstname':$scope.firstName,
+            	'lastname':$scope.lastName,
+            	'ccnumber':$scope.ccNumber,
+            	'billaddr':$scope.billAddr,
+            	'cvv':$scope.cvv,
+            	'expmonth':$scope.expMonth,
+            	'expyear':$scope.expYear})
+
+            .success(function(data,status,headers,config){console.log("Data Inserted Successfully");});}
+            $scope.reset();
+         });
+            </script>
+</body>
+</html>

@@ -53,6 +53,8 @@ namespace GeekText_Team7.Controllers
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.ChangeEmailSuccess ? "Your email has been changed."
+                : message == ManageMessageId.ChangeUserNameSuccess ? "Your username has been changed."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -71,7 +73,6 @@ namespace GeekText_Team7.Controllers
             
             return View(model);
         }
-
 
 
         // POST: /Account/Index
@@ -120,6 +121,13 @@ namespace GeekText_Team7.Controllers
         //
         // GET: /Manage/AddPhoneNumber
         public IActionResult AddPhoneNumber()
+        {
+            return View();
+        }
+
+        //
+        //GET: /Manage/CreditCard
+        public IActionResult CreditCard()
         {
             return View();
         }
@@ -235,6 +243,84 @@ namespace GeekText_Team7.Controllers
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
+
+
+        /**
+        //
+        // GET: /Manage/ChangeUsername
+        [HttpGet]
+        public IActionResult ChangeUserName()
+        {
+            return View();
+        }
+
+
+        
+        //
+        // POST: /Manage/ChangeUserName
+        [HttpPost]
+        public async Task<IActionResult> ChangeUserName(ChangeUserNameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                var result = await _userManager.ChangeUserNameAsync(user, model.OldUserName, model.NewUserName);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their username successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeUserNameSuccess });
+                }
+                AddErrors(result);
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+        **/
+
+
+
+        //
+        // GET: /Manage/ChangeEmail
+        [HttpGet]
+        public IActionResult ChangeEmail()
+        {
+            return View();
+        }
+
+
+
+        //POST: /Manage/ChangeEmail
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeEmail(ChangeEmailViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, model.NewEmail);
+                var result = await _userManager.ChangeEmailAsync(user, model.NewEmail, token);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their email successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeEmailSuccess });
+                }
+                AddErrors(result);
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+
+
 
         //
         // GET: /Manage/ChangePassword
@@ -399,6 +485,18 @@ namespace GeekText_Team7.Controllers
 
         #region Helpers
 
+        public void ChangeUserName(User user, string currentUserName, string newUserName)
+        {
+            if(user.UserName == currentUserName)
+            {
+                user.UserName = newUserName;
+            }
+
+
+        }
+
+
+
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -412,6 +510,8 @@ namespace GeekText_Team7.Controllers
             AddPhoneSuccess,
             AddLoginSuccess,
             ChangePasswordSuccess,
+            ChangeEmailSuccess,
+            ChangeUserNameSuccess,
             SetTwoFactorSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,

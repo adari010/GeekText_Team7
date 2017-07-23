@@ -9,6 +9,8 @@ namespace GeekText_Team7.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public bool HasUsername { get; set; }
+
         public bool HasPassword { get; set; }
 
         public IList<UserLoginInfo> Logins { get; set; }

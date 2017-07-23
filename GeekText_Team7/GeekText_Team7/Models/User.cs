@@ -15,7 +15,7 @@ namespace GeekText_Team7.Models
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Alias { get; set; }
+        public string UserName { get; set; }
         public string City { get; set; }
         public DateTime Dob { get; set; }
         public string Sex { get; set; }
