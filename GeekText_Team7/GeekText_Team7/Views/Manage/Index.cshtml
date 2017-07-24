@@ -17,14 +17,7 @@
     <dl class="dl-horizontal">
         <dt>Username:</dt>
         <dd>
-            @if (Model.HasUsername)
-            {
-                <a asp-controller="Manage" asp-action="ChangeUserName" class="btn-bracketed">Edit</a>
-            }
-            else
-            {
-                <a asp-controller="Manage" asp-action="SetUserName" class="btn-bracketed">Create</a>
-            }
+            <a asp-controller="Manage" asp-action="ChangeUserName" class="btn-bracketed">Edit</a>
         </dd>
     </dl>
 
@@ -42,6 +35,13 @@
             {
                 <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
             }
+        </dd>
+    </dl>
+
+    <dl class="dl-horizontal">
+        <dt>Username:</dt>
+        <dd>
+            <a asp-controller="Manage" asp-action="Name" class="btn-bracketed">Edit</a>
         </dd>
     </dl>
 

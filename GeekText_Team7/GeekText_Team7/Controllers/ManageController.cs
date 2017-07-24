@@ -55,6 +55,9 @@ namespace GeekText_Team7.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : message == ManageMessageId.ChangeEmailSuccess ? "Your email has been changed."
                 : message == ManageMessageId.ChangeUserNameSuccess ? "Your username has been changed."
+                : message == ManageMessageId.ChangeFirstNameSuccess ? "Your first name has been changed."
+                : message == ManageMessageId.ChangeLastNameSuccess ? "Your last name has been changed."
+                : message == ManageMessageId.ChangeAddressSuccess ? "Your address has been changed."
                 : "";
 
             var user = await GetCurrentUserAsync();
@@ -245,7 +248,7 @@ namespace GeekText_Team7.Controllers
         }
 
 
-        /**
+        
         //
         // GET: /Manage/ChangeUsername
         [HttpGet]
@@ -255,7 +258,6 @@ namespace GeekText_Team7.Controllers
         }
 
 
-        
         //
         // POST: /Manage/ChangeUserName
         [HttpPost]
@@ -268,20 +270,22 @@ namespace GeekText_Team7.Controllers
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                var result = await _userManager.ChangeUserNameAsync(user, model.OldUserName, model.NewUserName);
-                if (result.Succeeded)
+                if(model.OldUserName == user.UserName)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User changed their username successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeUserNameSuccess });
+                    user.UserName = model.NewUserName;
+                    var result = await _userManager.UpdateAsync(user);
+                    if (result.Succeeded)
+                    {
+                       await _signInManager.SignInAsync(user, isPersistent: false);
+                       _logger.LogInformation(3, "User changed their username successfully.");
+                        return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeUserNameSuccess });
+                    }
+                    AddErrors(result);
+                    return View(model);
                 }
-                AddErrors(result);
-                return View(model);
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
-        **/
-
 
 
         //
@@ -314,7 +318,7 @@ namespace GeekText_Team7.Controllers
                     _logger.LogInformation(3, "User changed their email successfully.");
                     return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeEmailSuccess });
                 }
-                AddErrors(result);
+                //AddErrors(result);
                 return View(model);
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
@@ -484,18 +488,6 @@ namespace GeekText_Team7.Controllers
         }
 
         #region Helpers
-
-        public void ChangeUserName(User user, string currentUserName, string newUserName)
-        {
-            if(user.UserName == currentUserName)
-            {
-                user.UserName = newUserName;
-            }
-
-
-        }
-
-
 
         private void AddErrors(IdentityResult result)
         {
