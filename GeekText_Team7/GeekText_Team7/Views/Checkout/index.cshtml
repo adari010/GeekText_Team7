@@ -1,0 +1,36 @@
+﻿@model IEnumerable<GeekText_Team7.Models.Book>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div >
+    @*<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_xclick">
+    <input type="text" name="business" value="you@youremail.com">
+    <br />
+    <input id="items" type="text" readonly name="item_name" value="Book1">
+        <br/>
+    <input id="items2" type="text" readonly name="item_name" value="Book2">
+
+    <input type="hidden" name="currency_code" value="USD">
+    <input id="price" type="hidden" name="amount" value="10.00">
+    <br />
+    <br />
+    <input type="image" src="http://www.paypal.com/en_US/i/btn/x-click-but01.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+    </form>*@
+
+    <form id="cartContent" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart">  <!-- change _xclick to _cart -->
+        <input type="hidden" name="upload" value="1">  <!-- add this line in your code -->
+        <input type="hidden" name="business" value="lalvarezcu-facilitator@gmail.com">
+        @*<input name="notify_url" value="http://localhost:60613/paypal_ipn_mvc.cs" type="hidden">*@
+        
+    </form>
+
+</div>
+
+
+

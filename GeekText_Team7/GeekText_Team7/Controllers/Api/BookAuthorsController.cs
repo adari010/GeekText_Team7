@@ -19,8 +19,24 @@ namespace GeekText_Team7.Controllers.Api
             _context = context;    
         }
 
-        // GET: BookAuthors
-        public async Task<IActionResult> Index(int id, string genre)
+        [HttpGet]
+        public async Task<IActionResult> MyAction(string search)
+        {
+            //do whatever you need with the parameter, 
+            //like using it as parameter in Linq to Entities or Linq to Sql, etc. 
+            //Suppose your search result will be put in variable "result". 
+
+            var viewModel = new BookIndexData();
+
+            
+
+
+            return View(); 
+
+        }
+
+            // GET: BookAuthors
+            public async Task<IActionResult> Index(int id, string genre, string search)
         {
             var viewModel = new BookIndexData();
 
@@ -31,10 +47,23 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderBy(b => b.Title)
                 .ToListAsync();
             }
+            else if (id == 5 && genre != null)
+            {
+                viewModel.Book = await _context.Book
+                .Where(b => b.Genre.Equals(genre))
+                .OrderByDescending(b => b.Title)
+                .ToListAsync();
+            }
             else if (id == 1 && genre == null)
             {
                 viewModel.Book = await _context.Book
                 .OrderBy(b => b.Genre)
+                .ToListAsync();
+            }
+            else if (id == 5 && genre == null)
+            {
+                viewModel.Book = await _context.Book
+                .OrderByDescending(b => b.Genre)
                 .ToListAsync();
             }
             else if (id == 2)
@@ -44,18 +73,46 @@ namespace GeekText_Team7.Controllers.Api
                 .AsNoTracking()
                 .ToListAsync();
             }
+            else if (id == 6)
+            {
+                viewModel.Book = await _context.Book
+                .OrderByDescending(b => b.Price)
+                .AsNoTracking()
+                .ToListAsync();
+            }
             else if (id == 3)
             {
                 viewModel.Book = await _context.Book
-                    .OrderByDescending(b => b.Orders)
+                .OrderByDescending(b => b.Orders)
+                .AsNoTracking()
+                .ToListAsync();
+            }
+            else if (id == 7)
+            {
+                viewModel.Book = await _context.Book
+                .OrderBy(b => b.Orders)
                 .AsNoTracking()
                 .ToListAsync();
             }
             else if (id == 4)
             {
                 viewModel.Book = await _context.Book
-                    .OrderByDescending(b => b.TechValleyTimesOrders)
+                .OrderByDescending(b => b.TechValleyTimesOrders)
                 .AsNoTracking()
+                .ToListAsync();
+            }
+            else if (id == 8)
+            {
+                viewModel.Book = await _context.Book
+                .OrderBy(b => b.TechValleyTimesOrders)
+                .AsNoTracking()
+                .ToListAsync();
+            }
+            else if (search != null)
+            {
+                viewModel.Book = await _context.Book
+                .Where(b => b.Title.Contains(search))
+                .OrderBy(b => b.Title)
                 .ToListAsync();
             }
             else
@@ -71,6 +128,18 @@ namespace GeekText_Team7.Controllers.Api
                 .ToListAsync();
 
             viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> MostOrders()
+        {
+            var viewModel = new BookIndexData();
+
+            viewModel.Book = await _context.Book
+                .OrderByDescending(b => b.Orders)
                 .AsNoTracking()
                 .ToListAsync();
 

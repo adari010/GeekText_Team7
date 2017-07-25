@@ -17,5 +17,7 @@ namespace GeekText_Team7.Models.ManageViewModels
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        public IEnumerable<ApplicationUser> ApplicationUser { get; set; }
     }
 }

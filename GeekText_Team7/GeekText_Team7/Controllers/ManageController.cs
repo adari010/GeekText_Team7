@@ -37,7 +37,7 @@ namespace GeekText_Team7.Controllers
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
-        }
+    }
 
         //
         // GET: /Manage/Index

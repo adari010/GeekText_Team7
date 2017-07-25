@@ -1,4 +1,4 @@
-@charset 'UTF-8';
+﻿@charset 'UTF-8';
 /* Slider */
 .slick-loading .slick-list
 {
@@ -6,14 +6,12 @@
 }
 
 /* Icons */
-@font-face
-{
-    font-family: 'slick';
+@font-face {
     font-weight: normal;
     font-style: normal;
-
-    src: url('./fonts/slick.eot');
-    src: url('./fonts/slick.eot?#iefix') format('embedded-opentype'), url('./fonts/slick.woff') format('woff'), url('./fonts/slick.ttf') format('truetype'), url('./fonts/slick.svg#slick') format('svg');
+    font-family: 'Glyphicons Halflings';
+    src: url('../fonts/glyphicons-halflings-regular.eot');
+    src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 /* Arrows */
 .slick-prev,
@@ -36,9 +34,9 @@
 
     cursor: pointer;
 
-    color: transparent;
-    border: none;
-    outline: none;
+    color: aqua;
+    border: solid;
+    outline: solid;
     background: transparent;
 }
 .slick-prev:hover,
@@ -46,8 +44,8 @@
 .slick-next:hover,
 .slick-next:focus
 {
-    color: transparent;
-    outline: none;
+    color: aqua;
+    outline: solid;
     background: transparent;
 }
 .slick-prev:hover:before,
