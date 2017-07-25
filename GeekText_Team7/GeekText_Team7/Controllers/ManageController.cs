@@ -12,6 +12,7 @@ using GeekText_Team7.Models.ManageViewModels;
 using GeekText_Team7.Services;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace GeekText_Team7.Controllers
 {
@@ -55,7 +56,6 @@ namespace GeekText_Team7.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : message == ManageMessageId.ChangeEmailSuccess ? "Your email has been changed."
                 : message == ManageMessageId.ChangeUserNameSuccess ? "Your username has been changed."
-                : message == ManageMessageId.ChangeNameSuccess ? "Your name has been changed."
                 : message == ManageMessageId.ChangeFirstNameSuccess ? "Your first name has been changed."
                 : message == ManageMessageId.ChangeLastNameSuccess ? "Your last name has been changed."
                 : message == ManageMessageId.ChangeAddressSuccess ? "Your address has been changed."
@@ -136,6 +136,53 @@ namespace GeekText_Team7.Controllers
             return View();
         }
 
+        //
+        // POST: /Manage/AddCreditCard
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddCreditCard(AddCreditCardViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = await GetCurrentUserAsync();
+
+            string userid = user.Id;
+            string firstname = model.FirstName;
+            string lastname = model.LastName;
+            string billaddr = model.BillingAddress;
+            string city = model.City;
+            string state = model.State;
+            string zipcode = model.ZipCode;
+            string ccnumber = model.CCNumber;
+            string cvv = model.CVV;
+            using (SqlConnection conn = new SqlConnection("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=aspnet-GeekText_Team7-e7624461-0ae2-4799-a16d-382f4cc9d580;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+            {
+                using (SqlCommand cmd = new SqlCommand())
+                {
+                    cmd.Connection = conn;
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    cmd.CommandText = @"INSERT INTO CreditCard(UserId,FirstName,LastName,BillingAddress,City,State,ZipCode,CCNumber,CVV) 
+                           VALUES(@param1,@param2,@param3,@param4,@param5,@param6,@param7,@param8,@param9)";
+
+                    cmd.Parameters.AddWithValue("@param1", userid);
+                    cmd.Parameters.AddWithValue("@param2", firstname);
+                    cmd.Parameters.AddWithValue("@param3", lastname);
+                    cmd.Parameters.AddWithValue("@param4", billaddr);
+                    cmd.Parameters.AddWithValue("@param5", city);
+                    cmd.Parameters.AddWithValue("@param6", state);
+                    cmd.Parameters.AddWithValue("@param7", zipcode);
+                    cmd.Parameters.AddWithValue("@param8", ccnumber);
+                    cmd.Parameters.AddWithValue("@param9", cvv);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            return RedirectToAction(nameof(Index), "Manage");
+        }
 
 
         //
@@ -398,18 +445,18 @@ namespace GeekText_Team7.Controllers
         }
 
         //
-        // GET: /Manage/ChangeName
+        // GET: /Manage/ChangeFirstName
         [HttpGet]
-        public IActionResult ChangeName()
+        public IActionResult ChangeFirstName()
         {
             return View();
         }
         
         
         //
-        // POST: /Manage/ChangeName
+        // POST: /Manage/ChangeFirstName
         [HttpPost]
-        public async Task<IActionResult> ChangeName(ChangeNameViewModel model)
+        public async Task<IActionResult> ChangeFirstName(ChangeFirstNameViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -418,13 +465,13 @@ namespace GeekText_Team7.Controllers
             var user = await GetCurrentUserAsync();
             if (user != null)
             {
-                user.UserName = model.NewName;
+                user.FirstName = model.NewFirstName;
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User changed their name successfully.");
-                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeNameSuccess });
+                    _logger.LogInformation(3, "User changed their first name successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeFirstNameSuccess });
                 }
             AddErrors(result);
             return View(model);
@@ -432,7 +479,82 @@ namespace GeekText_Team7.Controllers
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
+
+
+        //
+        // GET: /Manage/ChangeLastName
+        [HttpGet]
+        public IActionResult ChangeLastName()
+        {
+            return View();
+        }
+
         
+        //
+        // POST: /Manage/ChangeLastName
+        [HttpPost]
+        public async Task<IActionResult> ChangeLastName(ChangeLastNameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                user.LastName = model.NewLastName;
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their last name successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeLastNameSuccess });
+                }
+                AddErrors(result);
+                return View(model);
+
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+
+
+        //
+        // GET: /Manage/ChangeAddress
+        [HttpGet]
+        public IActionResult ChangeAddress()
+        {
+            return View();
+        }
+
+
+        //
+        // POST: /Manage/ChangeAddress
+        [HttpPost]
+        public async Task<IActionResult> ChangeAddress(ChangeAddressViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                user.Address = model.NewAddress;
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their address successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeAddressSuccess });
+                }
+                AddErrors(result);
+                return View(model);
+
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+
+
 
         //GET: /Manage/ManageLogins
         [HttpGet]
@@ -544,7 +666,6 @@ namespace GeekText_Team7.Controllers
             ChangePasswordSuccess,
             ChangeEmailSuccess,
             ChangeUserNameSuccess,
-            ChangeNameSuccess,
             ChangeFirstNameSuccess,
             ChangeLastNameSuccess,
             ChangeAddressSuccess,
@@ -559,6 +680,7 @@ namespace GeekText_Team7.Controllers
         {
             return _userManager.GetUserAsync(HttpContext.User);
         }
+
 
         #endregion
     }

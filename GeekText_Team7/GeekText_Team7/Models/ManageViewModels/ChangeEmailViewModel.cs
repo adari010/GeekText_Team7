@@ -8,12 +8,6 @@ namespace GeekText_Team7.Models.ManageViewModels
 {
     public class ChangeEmailViewModel
     {
-        /**
-        [Required]
-        [DataType(DataType.EmailAddress)]
-        [Display(Name = "Current email")]
-        public string OldEmail { get; set; }
-        **/
         [Required]
         [DataType(DataType.EmailAddress)]
         [Display(Name = "New email")]
