@@ -8,6 +8,12 @@ namespace GeekText_Team7.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+
+
+        [Required]
+        [Display(Name = "User name")]
+        public string UserName { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -23,5 +29,6 @@ namespace GeekText_Team7.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using GeekText_Team7.Models;
 using GeekText_Team7.Models.AccountViewModels;
 using GeekText_Team7.Services;
+using System.IO;
 
 namespace GeekText_Team7.Controllers
 {
@@ -66,16 +67,22 @@ namespace GeekText_Team7.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
                     return RedirectToLocal(returnUrl);
                 }
+
+
+                /*
                 if (result.RequiresTwoFactor)
                 {
                     return RedirectToAction(nameof(SendCode), new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 }
+                */
+
+
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning(2, "User account locked out.");
@@ -109,10 +116,11 @@ namespace GeekText_Team7.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
+
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -144,6 +152,10 @@ namespace GeekText_Team7.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
+
+
+
+        /*
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
@@ -232,6 +244,12 @@ namespace GeekText_Team7.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View(model);
         }
+
+        */
+
+
+
+
 
         // GET: /Account/ConfirmEmail
         [HttpGet]
@@ -342,6 +360,13 @@ namespace GeekText_Team7.Controllers
             return View();
         }
 
+
+
+
+
+
+
+        /**
         //
         // GET: /Account/SendCode
         [HttpGet]
@@ -442,6 +467,13 @@ namespace GeekText_Team7.Controllers
                 return View(model);
             }
         }
+
+
+        */
+
+
+
+
 
         //
         // GET /Account/AccessDenied

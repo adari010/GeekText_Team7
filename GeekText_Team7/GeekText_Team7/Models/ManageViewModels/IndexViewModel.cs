@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 
 namespace GeekText_Team7.Models.ManageViewModels
 {
     public class IndexViewModel
     {
+        public bool HasUsername { get; set; }
+
         public bool HasPassword { get; set; }
 
         public IList<UserLoginInfo> Logins { get; set; }
@@ -18,6 +21,7 @@ namespace GeekText_Team7.Models.ManageViewModels
 
         public bool BrowserRemembered { get; set; }
 
-        public IEnumerable<ApplicationUser> ApplicationUser { get; set; }
+        public IFormFile AvatarImage { get; set; }
+        public string Email { get; internal set; }
     }
 }
