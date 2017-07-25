@@ -13,7 +13,7 @@ $expmonth = mysql_real_escape_string($data->$expmonth);
 $expyear = mysql_real_escape_string($data->$expyear);
 
 mysql_connect("localhost", "root", ""); 
-mysql_select_db("CreditCard");
+mysql_select_db("aspnet-GeekText_Team7-e7624461-0ae2-4799-a16d-382f4cc9d580");
 
 mysqli_query("INSERT INTO CreditCard (FirstName, LastName, CCNumber, BillAddr, City, State, ZipCode, CVV, ExpMonth, ExpYear) VALUES ('"$firstname"','"$lastname"','"$ccnumber"','"$billaddr"', '"$city"','"$state"','"$zipcode"','"$cvv"','"$expmonth"','"$expyear"')");
 ?>

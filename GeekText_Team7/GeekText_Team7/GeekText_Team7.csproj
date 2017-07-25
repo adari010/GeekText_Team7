@@ -47,5 +47,8 @@
   <ItemGroup>
     <Folder Include="Controllers\Api\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\insert.php" />
+  </ItemGroup>
 
 </Project>

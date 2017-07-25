@@ -22,33 +22,31 @@
     </dl>
 
 
-
-
     <dl class="dl-horizontal">
         <dt>Password:</dt>
         <dd>
             @if (Model.HasPassword)
             {
-                <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Change</a>
+                <a asp-controller="Manage" asp-action="ChangePassword" class="btn-bracketed">Edit</a>
             }
             else
             {
-                <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Create</a>
+                <a asp-controller="Manage" asp-action="SetPassword" class="btn-bracketed">Edit</a>
             }
         </dd>
     </dl>
 
     <dl class="dl-horizontal">
-        <dt>Username:</dt>
+        <dt>Name:</dt>
         <dd>
-            <a asp-controller="Manage" asp-action="Name" class="btn-bracketed">Edit</a>
+            <a asp-controller="Manage" asp-action="ChangeName" class="btn-bracketed">Edit</a>
         </dd>
     </dl>
 
     <dl class="dl-horizontal">
         <dt>Email:</dt>
         <dd>
-            <a asp-controller="Manage" asp-action="ChangeEmail" class="btn-bracketed">Change</a>
+            <a asp-controller="Manage" asp-action="ChangeEmail" class="btn-bracketed">Edit</a>
         </dd>
     </dl>
 
@@ -58,7 +56,7 @@
     <dl class="dl-horizontal">
         <dt>Credit Card Info:</dt>
         <dd>
-            <a asp-controller="Manage" asp-action="CreditCard" class="btn-bracketed">Edit</a>
+            <a asp-controller="Manage" asp-action="AddCreditCard" class="btn-bracketed">Edit</a>
         </dd>
     </dl>
 

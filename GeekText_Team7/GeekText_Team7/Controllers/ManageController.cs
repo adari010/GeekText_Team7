@@ -55,6 +55,7 @@ namespace GeekText_Team7.Controllers
                 : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
                 : message == ManageMessageId.ChangeEmailSuccess ? "Your email has been changed."
                 : message == ManageMessageId.ChangeUserNameSuccess ? "Your username has been changed."
+                : message == ManageMessageId.ChangeNameSuccess ? "Your name has been changed."
                 : message == ManageMessageId.ChangeFirstNameSuccess ? "Your first name has been changed."
                 : message == ManageMessageId.ChangeLastNameSuccess ? "Your last name has been changed."
                 : message == ManageMessageId.ChangeAddressSuccess ? "Your address has been changed."
@@ -129,11 +130,13 @@ namespace GeekText_Team7.Controllers
         }
 
         //
-        //GET: /Manage/CreditCard
-        public IActionResult CreditCard()
+        //GET: /Manage/AddCreditCard
+        public IActionResult AddCreditCard()
         {
             return View();
         }
+
+
 
         //
         // POST: /Manage/AddPhoneNumber
@@ -394,6 +397,43 @@ namespace GeekText_Team7.Controllers
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
+        //
+        // GET: /Manage/ChangeName
+        [HttpGet]
+        public IActionResult ChangeName()
+        {
+            return View();
+        }
+        
+        
+        //
+        // POST: /Manage/ChangeName
+        [HttpPost]
+        public async Task<IActionResult> ChangeName(ChangeNameViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                user.UserName = model.NewName;
+                var result = await _userManager.UpdateAsync(user);
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User changed their name successfully.");
+                    return RedirectToAction(nameof(Index), new { Message = ManageMessageId.ChangeNameSuccess });
+                }
+            AddErrors(result);
+            return View(model);
+            
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
+        }
+        
+
         //GET: /Manage/ManageLogins
         [HttpGet]
         public async Task<IActionResult> ManageLogins(IndexViewModel model, ManageMessageId? message = null)
@@ -504,6 +544,7 @@ namespace GeekText_Team7.Controllers
             ChangePasswordSuccess,
             ChangeEmailSuccess,
             ChangeUserNameSuccess,
+            ChangeNameSuccess,
             ChangeFirstNameSuccess,
             ChangeLastNameSuccess,
             ChangeAddressSuccess,
