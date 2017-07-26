@@ -186,3 +186,7 @@ $(document).ready(function () {
 
 });
 
+$('#searchDropdownBox').on('change', function () {
+    $('#passID').val($(this).val() );
+});
+

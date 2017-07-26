@@ -47,18 +47,17 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact" style="margin: 25px 0px 25px 0px">Contact</a></li>
                 </ul>
 
-                @{ int id = 0}
-
                 <select class='navbar-form navbar-left nav-search-dropdown searchSelect' id='searchDropdownBox' style="display:inline-block; margin: 40px 0px 40px 0px">
-                    <option selected='selected' value='search-alias=aps'>All</option>
-                    <option value='genre'>Genre</option>
-                    <option value='topSellers'>Top Sellers</option>
-                    <option value='rating'>Book Rating</option>
+                    <option selected='selected' value='1'>Title</option>
+                    <option value='2'>Genre</option>
+                    <option value='3'>Author</option>
                 </select>
 
+
+                               
                 <form class="navbar-form navbar-left" style="margin: 30px 0px 30px 0px" method="get" action="@(Url.Action("index", "bookauthors"))">
-                    <div class="input-group">+
-                        <input type="" name="id" value="1">
+                    <div class="input-group">
+                        <input id="passID" type="hidden" name="category" value="1">
                         <input type="text" name="search" id="search" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
                             <button class="btn btn-default" type="submit">

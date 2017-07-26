@@ -36,9 +36,11 @@ namespace GeekText_Team7.Controllers.Api
         }
 
             // GET: BookAuthors
-            public async Task<IActionResult> Index(int id, string genre, string search)
+            public async Task<IActionResult> Index(int id, string genre,int category, string search)
         {
             var viewModel = new BookIndexData();
+
+
 
             if (id == 1 && genre != null)
             {
@@ -110,10 +112,30 @@ namespace GeekText_Team7.Controllers.Api
             }
             else if (search != null)
             {
-                viewModel.Book = await _context.Book
-                .Where(b => b.Title.Contains(search))
-                .OrderBy(b => b.Title)
-                .ToListAsync();
+
+                if (category == 1)
+                {
+                    viewModel.Book = await _context.Book
+                    .Where(b => b.Title.Contains(search))
+                    .OrderBy(b => b.Title)
+                    .ToListAsync();
+                }
+                else if (category == 2)
+                {
+                    viewModel.Book = await _context.Book
+                    .Where(b => b.Genre.Contains(search))
+                    .OrderBy(b => b.Title)
+                    .ToListAsync();
+                }
+                else
+                {
+                    viewModel.Author = await _context.Author
+                   .Where(b => b.FirstName.Contains(search))
+                   .ToListAsync();
+
+                    viewModel.Book = await _context.Book
+                    .ToListAsync();
+                }
             }
             else
             {
@@ -121,13 +143,13 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderBy(b => b.Title)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                    .AsNoTracking()
+                    .ToListAsync();
             }
 
             viewModel.BookAuthor = await _context.BookAuthor
-                .AsNoTracking()
-                .ToListAsync();
-
-            viewModel.Author = await _context.Author
                 .AsNoTracking()
                 .ToListAsync();
 
