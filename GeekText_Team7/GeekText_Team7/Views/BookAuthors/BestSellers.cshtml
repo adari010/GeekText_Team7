@@ -1,0 +1,33 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+@{ int count1 = 0;}
+
+<button type="button" class="slick-prev">Previous</button>
+<div class="multiple-items">
+    @{
+        foreach (var book1 in Model.Book)
+        {
+            if (count1 < 10)
+            {
+        <div><a asp-action="BookDetails" asp-route-id="@book1.Id"><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book1.Isbn)).jpg" /></a></div>
+                count1++;
+            }
+        }
+    }
+
+</div>
+
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" src="~/lib/slick/slick.min.js"></script>
+
+<script type="text/javascript">
+    $('.multiple-items').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
+</script>
+

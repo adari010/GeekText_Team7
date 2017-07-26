@@ -5,19 +5,32 @@
 }
 
 <h2>Index</h2>
+
+
+@*<form method="get" action="@url.action("index", "bookauthors")"> 
+    <label for="search">search</label> 
+    <input type="text" name="search" id="search" /> 
+    <button type="submit">perform search</button> 
+</form>*@
+
+
+@*<a asp-action="BestSellers">test</a>
+
 @{ int count1 = 0;}
 
+<button type="button" class="slick-prev">Previous</button>
 <div class="multiple-items">
     @{
         foreach (var book1 in Model.Book)
         {
-            if(count1 <= 10)
+            if (count1 < 10)
             {
-                <div><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book1.Isbn)).jpg"/></div>
+                <div><a asp-action="BookDetails" asp-route-id="@book1.Id"><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book1.Isbn)).jpg" /></a></div>
                 count1++;
             }
         }
     }
+
 </div>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -27,11 +40,13 @@
 <script type="text/javascript">
     $('.multiple-items').slick({
         infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
     });
 </script>
-
+    *@
 <style>
     .dropdown {
         position: relative;
@@ -59,10 +74,10 @@
 <div class="dropdown">
     <span><u>Sort By...</u></span>
     <div class="dropdown-content">
-        <a asp-action="index" asp-route-id="1">Genre</a>
+        <a asp-action="index" asp-route-id="1">Genre</a> <a asp-action="index" asp-route-id="5">v</a>
             <ul style="list-style-type:none">
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a> <a asp-action="index" asp-route-id="5" asp-route-genre="GraphicNovel">v</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a> <a asp-action="index" asp-route-id="5" asp-route-genre="Scifi">v</a></li>
                 <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li>
                 <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li>
                 <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li>
@@ -76,7 +91,6 @@
 </div>
 
 
-
 @{ int count = 0;}
 
 <div class="active">
@@ -85,30 +99,29 @@
             @foreach (var book in Model.Book)
             {
                 <td width="400">
-                <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
-                @Html.Raw("<br />")
-                @foreach (var author in Model.Author)
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    @Html.Raw("<br />")
+                    @foreach (var author in Model.Author)
                 {
                     foreach (var bookauthor in Model.BookAuthor)
                     {
                         if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
                         {
-                            <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
-                            @Html.Raw("<br />")
+                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                                @Html.Raw("<br />")
+                            }
                         }
                     }
-                }
-                <a asp-action="BookDetails" asp-route-id="@book.Id">@(book.Title)</a>
-                <br /> 
-                <button onclick="SetCookie( $(this) )">Add to Cart</button>
-                          
-                <br />
-                Price: $@Html.DisplayFor(modelitem => book.Price)
-                <br />
-                Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
-                <br />
-                Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)
-                <br />
+                    <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                    <br />
+                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                    <br />
+                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
+                    <br />
+                    @*Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
+    <br />
+    Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)*@
+                    <br />
                 </td>
                 count++;
                 if (count % 4 == 0)

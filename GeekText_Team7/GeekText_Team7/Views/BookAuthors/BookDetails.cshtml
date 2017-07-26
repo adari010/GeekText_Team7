@@ -9,15 +9,18 @@
 <div>
     <h4>BookAuthor</h4>
     <hr />
-    <dl class="dl-horizontal">
-        @foreach (var item in Model.Book)
-        {
-            <dt><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => item.Isbn)).jpg" /></dt>
-
-            <dd>@Html.DisplayFor(modelItem => item.Title) <br /> @Html.DisplayFor(modelItem => item.Description)</dd>
-            <dt><br /></dt>
+        @foreach (var book in Model.Book)
+        { 
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    <br />
+                    <br />
+                    <strong>@Html.DisplayFor(modelItem => book.Title)</strong>
+                    <br />
+                    <br />
+                    @Html.DisplayFor(modelItem => book.Description)
+                    <br />
+                    <br />
         }
-    </dl>
 </div>
 
 <div>
