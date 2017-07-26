@@ -1,5 +1,11 @@
 @model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
 
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
 
 <div>
     <hr />
@@ -35,7 +41,7 @@
                                     <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
                                     <br />
                                     <br />
-                                    <strong><a asp-action="BookDetails" asp-route-id="@book.Id"></a></strong>
+                                    <a asp-action="BookDetails" asp-route-id="@book.Id">@book.Title</a>
                                     <br /> 
                                     <br />
                                     @Html.DisplayFor(modelItem => book.Description)
@@ -52,5 +58,5 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index" ><p>Return to List</p></a>
 </div>

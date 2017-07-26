@@ -30,17 +30,17 @@
     <div class="dropdown-content">
         <a asp-action="index" asp-route-id="1">Genre</a> <a asp-action="index" asp-route-id="5">v</a>
             <ul style="list-style-type:none">
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a> <a asp-action="index" asp-route-id="5" asp-route-genre="GraphicNovel">v</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a> <a asp-action="index" asp-route-id="5" asp-route-genre="Scifi">v</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Game">v</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Fantasy">v</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Computer">v</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li>
             </ul>
-            <a asp-action="index" asp-route-id="2">Price</a> <a asp-action="index" asp-route-id="6">v</a>
+            <a asp-action="index" asp-route-id="2">Price</a>
             <br />
-            <a asp-action="index" asp-route-id="3">Orders</a> <a asp-action="index" asp-route-id="7">v</a>
+            <a asp-action="index" asp-route-id="3">Orders</a> 
             <br />
-            <a asp-action="index" asp-route-id="4">Tech Valley Times</a> <a asp-action="index" asp-route-id="58">v</a>
+            <a asp-action="index" asp-route-id="4">Tech Valley Times</a> 
 </div>
 </div>
 
@@ -70,12 +70,10 @@
                                 <br />
                             }
                     }
-
                     <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
                     <br />
                     <button onclick="SetCookie( $(this) )">Add to Cart</button>
-                    <br />
-                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
                     <br />
                     <strong><i>For Demo Use Only:</i></strong>
                     <br />

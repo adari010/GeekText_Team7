@@ -7,8 +7,6 @@ function goBack() {
 </script>
 
 <div>
-    <h4>BookAuthor</h4>
-    <hr />
     <table>
         <tr>
             @foreach (var book in Model.Book)
@@ -21,11 +19,11 @@ function goBack() {
                     <br />
 
                     <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
-                    <br />
-                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
-                    <br />
                     Price: $
                     <span>@Html.DisplayFor(modelitem => book.Price)</span>
+                    
+                    <br />
+                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
                     <br />
                     <br />
                     @Html.DisplayFor(modelItem => book.Description)
@@ -34,10 +32,9 @@ function goBack() {
                 </td>
             }
         </tr>
-    </table>
-       
+    </table> 
 </div>
 
 <div>
-    <button onclick="goBack()">Go Back</button>
+    <a asp-action="Index" ><p>Return to List</p></a>
 </div>
