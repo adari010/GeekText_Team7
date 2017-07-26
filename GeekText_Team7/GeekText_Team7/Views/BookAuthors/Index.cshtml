@@ -4,59 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-@*<form method="get" action="@url.action("index", "bookauthors")"> 
-    <label for="search">search</label> 
-    <input type="text" name="search" id="search" /> 
-    <button type="submit">perform search</button> 
-</form>*@
-
-
-@*<a asp-action="BestSellers">test</a>
-
-@{ int count1 = 0;}
-
-<style>
-    .slick-prev {
-        color: black;
-    }
-    .slick-next {
-        color: black;
-    }
-
-</style>
-
-<div class="content"><div class="multiple-items">
-    @{
-        foreach (var book1 in Model.Book)
-        {
-            if (count1 < 10)
-            {
-                <div><a asp-action="BookDetails" asp-route-id="@book1.Id"><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book1.Isbn)).jpg" /></a></div>
-                count1++;
-            }
-        }
-    }
-
-</div>
-</div>
-
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" src="~/lib/slick/slick.min.js"></script>
-
-<script type="text/javascript">
-    $('.multiple-items').slick({
-        arrows: true,
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2000,
-    });
-</script>*@
-  
 <style>
     .dropdown {
         position: relative;
@@ -85,15 +32,15 @@
             <ul style="list-style-type:none">
                 <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a> <a asp-action="index" asp-route-id="5" asp-route-genre="GraphicNovel">v</a></li>
                 <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a> <a asp-action="index" asp-route-id="5" asp-route-genre="Scifi">v</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li>
-                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Game">v</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Fantasy">v</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li> <a asp-action="index" asp-route-id="5" asp-route-genre="Computer">v</a></li>
             </ul>
-            <a asp-action="index" asp-route-id="2">Price</a>
+            <a asp-action="index" asp-route-id="2">Price</a> <a asp-action="index" asp-route-id="6">v</a>
             <br />
-            <a asp-action="index" asp-route-id="3">Orders</a>
+            <a asp-action="index" asp-route-id="3">Orders</a> <a asp-action="index" asp-route-id="7">v</a>
             <br />
-            <a asp-action="index" asp-route-id="4">Tech Valley Times</a>
+            <a asp-action="index" asp-route-id="4">Tech Valley Times</a> <a asp-action="index" asp-route-id="58">v</a>
 </div>
 </div>
 
@@ -103,42 +50,51 @@
 <div class="active">
     <table class="table">
         <tr>
+            @foreach (var bookauthor in Model.BookAuthor)
+            {
+                
             @foreach (var book in Model.Book)
             {
-                @foreach (var author in Model.Author)
-                {
-                    foreach (var bookauthor in Model.BookAuthor)
+                @if(book.Id == bookauthor.BookId)
+                { 
+
+                <td width="400">
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    <br />
+                    
+                    @foreach (var author in Model.Author)
                     {
-                        @if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
-                        {
-                        <td width="400">
-                        <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
-                        <br />
-                        
-                        <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
-                        <br />
-                        
-                        <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
-                        <br />
-                        <button onclick="SetCookie( $(this) )">Add to Cart</button>
-                        <br />
-                        Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
-                        <br />
-                        @*Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
-                        <br />
-                        Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)*@
-                        <br />
-                        </td>
-                        count++;
-                        if (count % 4 == 0)
-                        {
-                            @Html.Raw("</tr>")
-                            @Html.Raw("<tr>")
+                            @if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
+                            {
+                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                                <br />
                             }
-                        }
+                    }
+
+                    <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                    <br />
+                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                    <br />
+                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
+                    <br />
+                    <strong><i>For Demo Use Only:</i></strong>
+                    <br />
+                    <i>Total Ordered: @Html.DisplayFor(modelitem => book.Orders)</i>
+                    <br />
+                    <i>Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)</i>
+                    <br />
+                </td>
+                    count++;
+                    if (count % 4 == 0)
+                    {
+                    @Html.Raw("</tr>")
+                    @Html.Raw("<tr>")
+                        
                     }
                 }
-            }
+                    }
+                }
+
         </tr>
     </table>
 </div>

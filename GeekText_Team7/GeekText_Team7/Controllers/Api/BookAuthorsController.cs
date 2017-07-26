@@ -38,6 +38,14 @@ namespace GeekText_Team7.Controllers.Api
                 .Where(b => b.Genre.Equals(genre))
                 .OrderBy(b => b.Title)
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 5 && genre != null)
             {
@@ -45,18 +53,42 @@ namespace GeekText_Team7.Controllers.Api
                 .Where(b => b.Genre.Equals(genre))
                 .OrderByDescending(b => b.Title)
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 1 && genre == null)
             {
                 viewModel.Book = await _context.Book
                 .OrderBy(b => b.Genre)
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 5 && genre == null)
             {
                 viewModel.Book = await _context.Book
                 .OrderByDescending(b => b.Genre)
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 2)
             {
@@ -64,6 +96,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderBy(b => b.Price)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 6)
             {
@@ -71,6 +111,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderByDescending(b => b.Price)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 3)
             {
@@ -78,6 +126,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderByDescending(b => b.Orders)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 7)
             {
@@ -85,6 +141,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderBy(b => b.Orders)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 4)
             {
@@ -92,6 +156,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderByDescending(b => b.TechValleyTimesOrders)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                .AsNoTracking()
+                .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (id == 8)
             {
@@ -99,6 +171,14 @@ namespace GeekText_Team7.Controllers.Api
                 .OrderBy(b => b.TechValleyTimesOrders)
                 .AsNoTracking()
                 .ToListAsync();
+
+                viewModel.Author = await _context.Author
+                    .AsNoTracking()
+                    .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
             else if (search != null)
             {
@@ -113,6 +193,11 @@ namespace GeekText_Team7.Controllers.Api
                     viewModel.Author = await _context.Author
                    .ToListAsync();
 
+                    viewModel.BookAuthor = await _context.BookAuthor
+                        .Include(b => b.Author)
+                        .Include(c => c.Book)
+                        .ToListAsync();
+
                 }
                 else if (category == 2)
                 {
@@ -123,15 +208,6 @@ namespace GeekText_Team7.Controllers.Api
 
                     viewModel.Author = await _context.Author
                    .ToListAsync();
-                }
-                else
-                {
-                    viewModel.Author = await _context.Author
-                   .Where(b => b.FirstName.Contains(search))
-                   .ToListAsync();
-
-                    viewModel.Book = await _context.Book
-                    .ToListAsync();
 
                     viewModel.BookAuthor = await _context.BookAuthor
                         .Include(b => b.Author)
@@ -149,11 +225,13 @@ namespace GeekText_Team7.Controllers.Api
                 viewModel.Author = await _context.Author
                     .AsNoTracking()
                     .ToListAsync();
+
+                viewModel.BookAuthor = await _context.BookAuthor
+                    .AsNoTracking()
+                    .ToListAsync();
             }
 
-            viewModel.BookAuthor = await _context.BookAuthor
-                .AsNoTracking()
-                .ToListAsync();
+
 
             
 
