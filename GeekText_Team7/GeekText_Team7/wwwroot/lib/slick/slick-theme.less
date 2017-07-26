@@ -1,11 +1,11 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 // Default Variables
 
 @slick-font-path: "./fonts/";
 @slick-font-family: "slick";
 @slick-loader-path: "./";
-@slick-arrow-color: white;
+@slick-arrow-color: black;
 @slick-dot-color: black;
 @slick-dot-color-active: @slick-dot-color;
 @slick-prev-character: "←";
@@ -40,10 +40,10 @@
     height: 20px;
     width: 20px;
     line-height: 0px;
-    font-size: 0px;
+    font-size: 20px;
     cursor: pointer;
     background: transparent;
-    color: transparent;
+    color: black;
     top: 50%;
     -webkit-transform: translate(0, -50%);
     -ms-transform: translate(0, -50%);
@@ -54,7 +54,7 @@
     &:hover, &:focus {
         outline: none;
         background: transparent;
-        color: transparent;
+        color: black;
         &:before {
             opacity: @slick-opacity-on-hover;
         }
@@ -68,7 +68,7 @@
     font-family: @slick-font-family;
     font-size: 20px;
     line-height: 1;
-    color: @slick-arrow-color;
+    color: black;
     opacity: @slick-opacity-default;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -134,7 +134,7 @@
             outline: none;
             line-height: 0px;
             font-size: 0px;
-            color: transparent;
+            color: black;
             padding: 5px;
             cursor: pointer;
             &:hover, &:focus {

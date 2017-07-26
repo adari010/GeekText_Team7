@@ -19,28 +19,18 @@ namespace GeekText_Team7.Controllers.Api
             _context = context;    
         }
 
-        [HttpGet]
-        public async Task<IActionResult> MyAction(string search)
+        
+        public IActionResult Homepage()
         {
-            //do whatever you need with the parameter, 
-            //like using it as parameter in Linq to Entities or Linq to Sql, etc. 
-            //Suppose your search result will be put in variable "result". 
-
-            var viewModel = new BookIndexData();
-
-            
-
-
-            return View(); 
-
+            return View();
         }
 
-            // GET: BookAuthors
-            public async Task<IActionResult> Index(int id, string genre,int category, string search)
+        [HttpGet]
+
+        // GET: BookAuthors
+        public async Task<IActionResult> Index(int id, string genre,int category, string search)
         {
             var viewModel = new BookIndexData();
-
-
 
             if (id == 1 && genre != null)
             {
@@ -165,6 +155,8 @@ namespace GeekText_Team7.Controllers.Api
                 .AsNoTracking()
                 .ToListAsync();
 
+            
+
             return View(viewModel);
         }
 
@@ -172,8 +164,32 @@ namespace GeekText_Team7.Controllers.Api
         {
             var viewModel = new BookIndexData();
 
-            viewModel.Book = await _context.Book
+                viewModel.Book = await _context.Book
                 .OrderByDescending(b => b.Orders)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> RecentlyAdded()
+        {
+            var viewModel = new BookIndexData();
+
+            viewModel.Book = await _context.Book
+                .OrderByDescending(b => b.Id)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> TVTBest()
+        {
+            var viewModel = new BookIndexData();
+
+            viewModel.Book = await _context.Book
+                .OrderByDescending(b => b.TechValleyTimesOrders)
                 .AsNoTracking()
                 .ToListAsync();
 

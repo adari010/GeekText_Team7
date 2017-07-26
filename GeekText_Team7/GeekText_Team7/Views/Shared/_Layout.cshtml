@@ -26,12 +26,12 @@
     </environment>
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
-<body style="padding-top:100px">
+<body style="padding-top:120px">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index"><img height="75" width="75" src="~/images/GeekText.svg" /></a></li>
+                    <li><a asp-area="" asp-controller="BookAuthors" asp-action="Homepage"><img height="75" width="75" src="~/images/GeekText.svg" /></a></li>
                 </ul>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -86,7 +86,7 @@
             <h3>2017 - GeekText</h3>
             <table>
                 <tr>
-                    <td><a asp-area="" asp-controller="Home" asp-action="Index" style="margin: 25px 0px 25px 0px"><strong>Home</strong></a></td>
+                    <td><a asp-area="" asp-controller="BookAuthors" asp-action="Homepage" style="margin: 25px 0px 25px 0px"><strong>Home</strong></a></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td><strong>Contact Information:</strong></td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td>
-                        <a asp-area="" asp-controller="Home" asp-action="Biography" style="margin: 25px 0px 25px 0px"><strong>Biography</strong></a>
+                        
                     </td>
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td>Marketing: <i><a href="mailto:mquir016@fiu.edu">Marketing@GeekText.com</a></i></td>
@@ -144,4 +144,4 @@
 
     @RenderSection("Scripts", required: false)
 </body>
-</html
+</html>

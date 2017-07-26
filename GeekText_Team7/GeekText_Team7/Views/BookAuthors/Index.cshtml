@@ -6,7 +6,6 @@
 
 <h2>Index</h2>
 
-
 @*<form method="get" action="@url.action("index", "bookauthors")"> 
     <label for="search">search</label> 
     <input type="text" name="search" id="search" /> 
@@ -18,8 +17,17 @@
 
 @{ int count1 = 0;}
 
-<button type="button" class="slick-prev">Previous</button>
-<div class="multiple-items">
+<style>
+    .slick-prev {
+        color: black;
+    }
+    .slick-next {
+        color: black;
+    }
+
+</style>
+
+<div class="content"><div class="multiple-items">
     @{
         foreach (var book1 in Model.Book)
         {
@@ -32,6 +40,7 @@
     }
 
 </div>
+</div>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -39,14 +48,15 @@
 
 <script type="text/javascript">
     $('.multiple-items').slick({
+        arrows: true,
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000,
     });
-</script>
-    *@
+</script>*@
+  
 <style>
     .dropdown {
         position: relative;
@@ -67,9 +77,6 @@
         display: block;
     }
 </style>
-
-
-
 
 <div class="dropdown">
     <span><u>Sort By...</u></span>

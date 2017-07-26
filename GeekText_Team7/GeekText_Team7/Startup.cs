@@ -111,7 +111,7 @@ namespace GeekText_Team7
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=BookAuthors}/{action=Homepage}/{id?}");
             });
         }
     }
