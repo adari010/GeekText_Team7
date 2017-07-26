@@ -98,36 +98,38 @@
         <tr>
             @foreach (var book in Model.Book)
             {
-                <td width="400">
-                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
-                    @Html.Raw("<br />")
-                    @foreach (var author in Model.Author)
+                @foreach (var author in Model.Author)
                 {
                     foreach (var bookauthor in Model.BookAuthor)
                     {
-                        if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
+                        @if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
                         {
-                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
-                                @Html.Raw("<br />")
+                        <td width="400">
+                        <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                        <br />
+                        
+                        <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                        <br />
+                        
+                        <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                        <br />
+                        <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                        <br />
+                        Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
+                        <br />
+                        @*Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
+                        <br />
+                        Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)*@
+                        <br />
+                        </td>
+                        count++;
+                        if (count % 4 == 0)
+                        {
+                            @Html.Raw("</tr>")
+                            @Html.Raw("<tr>")
                             }
                         }
                     }
-                    <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
-                    <br />
-                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
-                    <br />
-                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
-                    <br />
-                    @*Total Ordered: @Html.DisplayFor(modelitem => book.Orders)
-    <br />
-    Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)*@
-                    <br />
-                </td>
-                count++;
-                if (count % 4 == 0)
-                {
-                    @Html.Raw("</tr>")
-                    @Html.Raw("<tr>")
                 }
             }
         </tr>
