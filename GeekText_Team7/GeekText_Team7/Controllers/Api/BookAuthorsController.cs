@@ -119,6 +119,10 @@ namespace GeekText_Team7.Controllers.Api
                     .Where(b => b.Title.Contains(search))
                     .OrderBy(b => b.Title)
                     .ToListAsync();
+
+                    viewModel.Author = await _context.Author
+                   .ToListAsync();
+
                 }
                 else if (category == 2)
                 {
@@ -126,6 +130,9 @@ namespace GeekText_Team7.Controllers.Api
                     .Where(b => b.Genre.Contains(search))
                     .OrderBy(b => b.Title)
                     .ToListAsync();
+
+                    viewModel.Author = await _context.Author
+                   .ToListAsync();
                 }
                 else
                 {
@@ -135,6 +142,11 @@ namespace GeekText_Team7.Controllers.Api
 
                     viewModel.Book = await _context.Book
                     .ToListAsync();
+
+                    viewModel.BookAuthor = await _context.BookAuthor
+                        .Include(b => b.Author)
+                        .Include(c => c.Book)
+                        .ToListAsync();
                 }
             }
             else
