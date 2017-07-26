@@ -92,11 +92,11 @@ namespace GeekText_Team7.Controllers
                     UserName = model.Email,
                     Email = model.Email
                 };
-                using (var memoryStream = new MemoryStream())
-                {
-                    await model.AvatarImage.CopyToAsync(memoryStream);
-                    //user.AvatarImage = memoryStream.ToArray();
-                }
+                //using (var memoryStream = new MemoryStream())
+                //{
+                //    await model.AvatarImage.CopyToAsync(memoryStream);
+                //    //user.AvatarImage = memoryStream.ToArray();
+                //}
             }
             return View();
         }
@@ -553,6 +553,28 @@ namespace GeekText_Team7.Controllers
             }
             return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
+
+
+        ////
+        //// GET: /Manage/AvatarImage
+        //[HttpGet]
+        //public IActionResult AvatarImage()
+        //{
+        //    return View();
+        //}
+
+
+        ////
+        ////POST: /Manage/AvatarImage
+        //[HttpPost]
+        //public async Task<IActionResult> AvatarImage(AvatarImageViewModel model)
+        //{
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    byte[] imageData = null;
+        //}
 
 
 

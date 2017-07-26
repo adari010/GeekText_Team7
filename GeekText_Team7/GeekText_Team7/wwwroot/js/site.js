@@ -28,7 +28,7 @@ function checkout() {
         if (cookie != '') {
 
 
-            cookie = cookie.split(',');
+            cookie = cookie.split('*');
             if (cookie.length > 0) {
 
                 totalPrice = $('#price');
@@ -46,7 +46,7 @@ function checkout() {
 
                 for (i = 0; i < cookie.length; i++) {
                     book = cookie[i].split('|');
-                    price = parseFloat(book[2]);
+                    price = parseFloat(book[1]);
                     payTotal += price;
 
                     addItems += '<input type="text" readonly="true" name="item_name_' + (i + 1) + '" value="' + book[0].replace('%3A', ':') + ' - $' + price + '">' +
@@ -68,28 +68,38 @@ function checkout() {
 }
 
 function GetCookie() {
-    var value = '; ' + decodeURI(document.cookie);
+    var value = '; ' + decodeURIComponent(decodeURIComponent(document.cookie) );
     var items = value.split('; ' + cname + '=');
     //cart = items.length;
     if (items.length > 1) {
 
-        items = items[1].split('%2C');
+        //items = items[1].split('%2C');
+        items = items[1].split('*');
 
         payTotal = 0;
         value = '';
 
-        for (i = 1; i < items.length; i++) {
+        for (i = 0; i < items.length; i++) {
             book = items[i].split('|');
+
+            if (book.length == 1) continue;
+
             payTotal += parseFloat(book[1]);
 
             $('#cartItems').prepend('<li><a href="#" class="removeItem" onclick="DeleteCookie( $(this) );" > (X)</a> - <a href="#">' + book[0].trim().replace('%3A', ':') + ' - ' + book[2].trim() + ' - $<span>' + book[1].trim() + '</a></li>');
-            value += (value == '') ? book[0].trim() + '|' + book[2].trim() + '|' + book[1].trim() : ',' + book[0] + '|' + book[2] + '|' + book[1];
-        }
-        cart = i - 1;
-        $('#cartAmount').text(cart);
-        //$('#payTotal').text(payTotal.toFixed(2));
-        $('#cartItems').append('<li><br><a href="/Checkout/" style="background-color: grey; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; "> Total: <span id="payTotal">' + payTotal.toFixed(2) + '</span></div></li>');
+            value += (value == '') ? book[0].trim() + '|' + book[1].trim() + '|' + book[2].trim() : '*' + book[0] + '|' + book[1] + '|' + book[2];
 
+            cart++;
+        }
+        //cart = i - 1;
+
+        if (cart > 0) {
+            $('#cartAmount').text(cart);
+            //$('#payTotal').text(payTotal.toFixed(2));
+            $('#cartItems').append('<li><br><a href="/Checkout/" style="background-color: grey; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; "> Total: <span id="payTotal">' + payTotal.toFixed(2) + '</span></div></li>');
+
+        }
+        
         return value;
     }
 
@@ -117,8 +127,8 @@ function SetCookie(obj) {
     $('#cartAmount').text(cart);
     $('#payTotal').text(payTotal);
 
-    if (typeof cookie != 'undefined')
-        cookie += ',' + bookName.trim() + '|' + bookPrice + '|' + isbn.trim();
+    if (typeof cookie != 'undefined' || cookie == '')
+        cookie += '*' + bookName.trim() + '|' + bookPrice + '|' + isbn.trim();
     else
         cookie = bookName.trim() + '|' + bookPrice + '|' + isbn.trim();
 
@@ -152,19 +162,21 @@ function DeleteCookie(obj) {
 
     }
 
-    cookie = cookie.replace(',' + bookName + '|' + isbn + '|' + bookPrice, '');
-    cookie = cookie.replace(bookName + '|' + isbn + '|' + bookPrice, '');
+    cookie = cookie.toString().replace('*' + bookName + '|' + bookPrice + '|' + isbn, '');
+    cookie = cookie.replace(bookName + '|' + bookPrice + '|' + isbn +'*', '');
+    cookie = cookie.replace(bookName + '|' + bookPrice + '|' + isbn, '');
 
     document.cookie = cname + '=' + encodeURIComponent(cookie) + '; expires=' + now.toGMTString() + '; path=/'
 
+
+    location.reload();
 
 }
 
 
 function ShowCart() {
 
-    $('#cartItems').css('display', 'block');
-
+    $('#cartItems').toggle('slow');
 }
 
 $('.removeItem').click(function (e) {

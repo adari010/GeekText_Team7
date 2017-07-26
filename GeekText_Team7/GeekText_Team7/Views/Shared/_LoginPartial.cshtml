@@ -8,9 +8,9 @@
 {
     <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right" style="margin: 25px 0px 25px 0px">
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            @*<li>
                 <img width="50" height="50" src="~/images/AvatarImage/Test.jpg">
-            </li>
+            </li>*@
             <li>
                 <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
