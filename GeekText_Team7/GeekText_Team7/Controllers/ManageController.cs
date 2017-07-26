@@ -555,6 +555,37 @@ namespace GeekText_Team7.Controllers
         }
 
 
+        //
+        // GET: /Manage/AvatarImage
+        [HttpGet]
+        public IActionResult AvatarImage()
+        {
+            return View();
+        }
+
+
+        ////
+        ////POST: /Manage/AvatarImage
+        //[HttpPost]
+        //public async Task<IActionResult> AvatarImage(AvatarImageViewModel model)
+        //{
+        //    if(!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
+        //    byte[] imageData = null;
+        //    if (Request.Files.Count > 0)
+        //    {
+        //        IFormFile poImgFile = 
+
+        //        using (var binary = new BinaryReader(poImgFile.InputStream))
+        //        {
+        //            imageData = binary.ReadBytes(poImgFile.ContentLength);
+        //        }
+        //    }
+        //}
+
+
 
         //GET: /Manage/ManageLogins
         [HttpGet]
