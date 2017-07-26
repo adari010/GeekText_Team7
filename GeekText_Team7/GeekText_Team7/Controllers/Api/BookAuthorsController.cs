@@ -169,7 +169,7 @@ namespace GeekText_Team7.Controllers.Api
                 .AsNoTracking()
                 .ToListAsync();
 
-            return View(viewModel);
+            return PartialView(viewModel);
         }
 
         public async Task<IActionResult> RecentlyAdded()
@@ -181,7 +181,7 @@ namespace GeekText_Team7.Controllers.Api
                 .AsNoTracking()
                 .ToListAsync();
 
-            return View(viewModel);
+            return PartialView(viewModel);
         }
 
         public async Task<IActionResult> TVTBest()
