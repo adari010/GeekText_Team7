@@ -48,3 +48,24 @@ textarea {
         display: none;
     }
 }
+
+
+#cartContent input {
+    border: none !important;
+    border-bottom: 1px #d0c9c9 solid !important;
+    width: 100% !important;
+}
+
+#cartItems li {
+    padding: 5px;
+    border-bottom: 1px #c7c2c2 solid;
+}
+
+#cartItems {
+    border: 1px #cac5c5 solid;
+    border-radius: 10px;
+}
+
+table tr td span {
+    font-weight: bolder;
+}

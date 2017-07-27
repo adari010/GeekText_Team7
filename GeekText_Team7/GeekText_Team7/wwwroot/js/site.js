@@ -96,7 +96,7 @@ function GetCookie() {
         if (cart > 0) {
             $('#cartAmount').text(cart);
             //$('#payTotal').text(payTotal.toFixed(2));
-            $('#cartItems').append('<li><br><a href="/Checkout/Index" style="background-color: grey; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; "> Total: <span id="payTotal">' + payTotal.toFixed(2) + '</span></div></li>');
+            $('#cartItems').append('<li><br><a href="/Checkout/Index" style="background-color: #5ca212; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; padding-top: 10px; "> Total: <span id="payTotal">' + payTotal.toFixed(2) + '</span></div></li>');
 
         }
         
@@ -138,7 +138,7 @@ function SetCookie(obj) {
 
     if (cart == 1) {
 
-        $('#cartItems').append('<li><br><a href="/Checkout/Index" style="background-color: grey; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; "> Total: <span id="payTotal">' + bookPrice.toFixed(2) + '</span></div></li>');
+        $('#cartItems').append('<li><br><a href="/Checkout/Index" style="background-color: #5ca212; padding: 5px 10px; color: white; margin-top: 50px; ">Checkout</a> <br> <div style="color: black; padding-top: 10px;"> Total: <span id="payTotal">' + bookPrice.toFixed(2) + '</span></div></li>');
 
     }
 }
