@@ -1,0 +1,40 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+<script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+<div>
+    <table>
+        <tr>
+            @foreach (var book in Model.Book)
+            {
+                <td>
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    <br />
+                    <br />
+                    <strong>@Html.DisplayFor(modelItem => book.Title)</strong>
+                    <br />
+
+                    <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                    Price: $
+                    <span>@Html.DisplayFor(modelitem => book.Price)</span>
+                    
+                    <br />
+                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                    <br />
+                    <br />
+                    @Html.DisplayFor(modelItem => book.Description)
+                    <br />
+                    <br />
+                </td>
+            }
+        </tr>
+    </table> 
+</div>
+
+<div>
+    <a asp-action="Index" ><p>Return to List</p></a>
+</div>

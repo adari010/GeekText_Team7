@@ -1,0 +1,37 @@
+@{
+    ViewData["Title"] = "Homepage";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <a style="width: 100%" asp-controller="BookAuthors" asp-action="Index" class="btn btn-lg btn-success">Browse All Books</a>
+    </div>
+</div>
+
+<h2>Best Sellers</h2>
+
+<br />
+
+<iframe frameborder="0" scrolling="no" height="300" width="100%" src="http://localhost:65272/bookauthors/MostOrders"></iframe>
+
+<br />
+
+<h2>Recently Added</h2>
+
+<br />
+
+<iframe frameborder="0" scrolling="no" height="300" width="100%" src="http://localhost:65272/bookauthors/RecentlyAdded"></iframe>
+
+<br />
+
+<h2>Tech Valley Times Best Sellers</h2>
+
+<br />
+
+<iframe frameborder="0" scrolling="no" height="300" width="100%" src="http://localhost:65272/bookauthors/TVTBest"></iframe>
+
+<br />
+
+
+
+

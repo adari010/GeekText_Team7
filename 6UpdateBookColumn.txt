@@ -1,0 +1,5 @@
+ALTER TABLE BookStoreSummer17.dbo.Book ADD Price Float;
+
+ALTER TABLE BookStoreSummer17.dbo.Book ADD TechValleyTimesOrders Int;
+
+ALTER TABLE BookStoreSummer17.dbo.Book ADD Orders Int;

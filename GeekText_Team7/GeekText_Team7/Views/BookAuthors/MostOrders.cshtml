@@ -1,0 +1,67 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+<!DOCTYPE html>
+<html>
+<head>
+    <base target="_parent" />
+    <link runat="server" rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    <link runat="server" rel="icon" href="~/favicon.ico" type="image/ico" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <environment names="Development">
+        <link rel="stylesheet" type="text/css" href="~/lib/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="~/lib/slick/slick-theme.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/Lumen.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" type="text/css" href="~/lib/slick/slick.css" />
+        <link rel="stylesheet" type="text/css" href="~/lib/slick/slick-theme.css" />
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/Lumen.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body style="padding-top:0px">
+
+    @{ int count1 = 0;}
+
+    @{
+        Layout = null;
+    }
+
+    <div class="multiple-items">
+        @{
+            foreach (var book1 in Model.Book)
+            {
+                if (count1 < 10)
+                {
+                    <div><a asp-action="BookDetails" asp-route-id="@book1.Id"><img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book1.Isbn)).jpg" /></a></div>
+                    count1++;
+                }
+            }
+        }
+
+    </div>
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="~/lib/slick/slick.min.js"></script>
+
+    <script type="text/javascript">
+        $('.multiple-items').slick({
+            infinite: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+        });
+    </script>
+
+    </body>
+</html>
+

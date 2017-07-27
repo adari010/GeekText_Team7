@@ -1,0 +1,62 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script>
+
+
+<div>
+    <hr />
+    @foreach (var item in Model.Author)
+    {
+        <strong>@Html.DisplayFor(modelItem => item.FirstName)</strong>
+        <strong>@Html.DisplayFor(modelItem => item.LastName)</strong>
+        <br />
+        @Html.DisplayFor(modelItem => item.Biography)
+        <br />
+    }
+</div>
+<br />
+    Books by this author:
+<br />
+<br />
+<div>
+    <table>
+        
+            @foreach (var book in Model.Book)
+            {
+                foreach (var bookauthor in Model.BookAuthor)
+                {
+                    foreach (var item in Model.Author)
+                    {
+                        <tr>
+                        @if (item.Id == bookauthor.AuthorId)
+                        {
+
+                            if (book.Id == bookauthor.BookId)
+                            {
+                                <td>
+                                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                                    <br />
+                                    <br />
+                                    <a asp-action="BookDetails" asp-route-id="@book.Id">@book.Title</a>
+                                    <br /> 
+                                    <br />
+                                    @Html.DisplayFor(modelItem => book.Description)
+                                    <br />
+                                    <br />
+                                </td>
+                            }
+                        }
+                        </tr>
+                    }
+                }
+            }
+    </table>
+</div>
+
+<div>
+    <a asp-action="Index" ><p>Return to List</p></a>
+</div>

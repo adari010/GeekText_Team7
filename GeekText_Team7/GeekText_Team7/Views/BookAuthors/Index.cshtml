@@ -1,0 +1,98 @@
+@model GeekText_Team7.Models.BookAuthorViewModels.BookIndexData
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        padding: 12px 16px;
+        z-index: 1;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+</style>
+
+<div class="dropdown">
+    <span><u>Sort By...</u></span>
+    <div class="dropdown-content">
+        <a asp-action="index" asp-route-id="1">Genre</a> 
+            <ul style="list-style-type:none">
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="GraphicNovel">Graphic Novel</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Scifi">Scifi</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Game">Game</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Fantasy">Fantasy</a></li>
+                <li><a asp-action="index" asp-route-id="1" asp-route-genre="Computer">Computer</a></li>
+            </ul>
+            <a asp-action="index" asp-route-id="2">Price</a>
+            <br />
+            <a asp-action="index" asp-route-id="3">Orders</a> 
+            <br />
+            <a asp-action="index" asp-route-id="4">Tech Valley Times</a> 
+</div>
+</div>
+
+
+@{ int count = 0;}
+
+<div class="active">
+    <table class="table">
+        <tr>
+            @foreach (var bookauthor in Model.BookAuthor)
+            {
+                
+            @foreach (var book in Model.Book)
+            {
+                @if(book.Id == bookauthor.BookId)
+                { 
+
+                <td width="400">
+                    <img width="186" height="300" src="~/images/Books/@(Html.DisplayFor(modelItem => book.Isbn)).jpg" />
+                    <br />
+                    
+                    @foreach (var author in Model.Author)
+                    {
+                            @if (author.Id == bookauthor.AuthorId && book.Id == bookauthor.BookId)
+                            {
+                                <a asp-action="AuthorDetails" asp-route-id="@author.Id">@(author.FirstName) @(author.LastName)</a>
+                                <br />
+                            }
+                    }
+                    <a asp-action="BookDetails" asp-route-id="@book.Id"><p>@(book.Title)</p></a>
+                    Price: $<span>@Html.DisplayFor(modelitem => book.Price)</span>
+                    <br />
+                    <button onclick="SetCookie( $(this) )">Add to Cart</button>
+                    <br />
+                    <strong><i>For Demo Use Only:</i></strong>
+                    <br />
+                    <i>Total Ordered: @Html.DisplayFor(modelitem => book.Orders)</i>
+                    <br />
+                    <i>Tech Valley Times Ordered: @Html.DisplayFor(modelitem => book.TechValleyTimesOrders)</i>
+                    <br />
+                </td>
+                    count++;
+                    if (count % 4 == 0)
+                    {
+                    @Html.Raw("</tr>")
+                    @Html.Raw("<tr>")
+                        
+                    }
+                }
+                    }
+                }
+
+        </tr>
+    </table>
+</div>

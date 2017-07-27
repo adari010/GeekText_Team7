@@ -1,0 +1,42 @@
+@model ChangeUserNameViewModel
+@{
+    ViewData["Title"] = "Change Username";
+}
+
+<h2>@ViewData["Title"].</h2>
+
+<form asp-controller="Manage" asp-action="ChangeUserName" method="post" class="form-horizontal">
+    <h4>Change Username Form</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="OldUserName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="OldUserName" class="form-control" />
+            <span asp-validation-for="OldUserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewUserName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="NewUserName" class="form-control" />
+            <span asp-validation-for="NewUserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmUserName" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ConfirmUserName" class="form-control" />
+            <span asp-validation-for="ConfirmUserName" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">Change Username</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

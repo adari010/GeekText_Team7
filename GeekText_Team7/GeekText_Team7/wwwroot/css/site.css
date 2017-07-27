@@ -23,6 +23,19 @@ textarea {
     line-height: 1.4;
 }
 
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display: inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+
+.btn-bracketed::after {
+    display: inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
 /* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
@@ -34,4 +47,25 @@ textarea {
     .carousel-caption {
         display: none;
     }
+}
+
+
+#cartContent input {
+    border: none !important;
+    border-bottom: 1px #d0c9c9 solid !important;
+    width: 100% !important;
+}
+
+#cartItems li {
+    padding: 5px;
+    border-bottom: 1px #c7c2c2 solid;
+}
+
+#cartItems {
+    border: 1px #cac5c5 solid;
+    border-radius: 10px;
+}
+
+table tr td span {
+    font-weight: bolder;
 }
